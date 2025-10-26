@@ -1,449 +1,497 @@
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Виртуальная Солнечная система</title>
+    <title>Психологический тест</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .screen {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1, h2 {
+            color: #4a4a4a;
+            text-align: center;
+        }
+        input, select, button {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
             box-sizing: border-box;
         }
-        
-        body {
-            overflow: hidden;
-            font-family: 'Arial', sans-serif;
+        button {
+            background-color: #4CAF50;
             color: white;
-            background: #000;
-        }
-        
-        #canvas-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        
-        #ui-container {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            z-index: 100;
-        }
-        
-        .planet-selector {
-            display: flex;
-            background: rgba(0, 30, 60, 0.7);
-            padding: 10px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .planet-btn {
-            width: 50px;
-            height: 50px;
-            margin: 0 5px;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            background-size: cover;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .planet-btn:hover {
-            transform: scale(1.1);
-            border-color: white;
-        }
-        
-        #info-panel {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 30, 60, 0.7);
-            padding: 15px;
-            border-radius: 10px;
-            max-width: 300px;
-            backdrop-filter: blur(10px);
-            transform: translateX(calc(100% + 30px));
-            transition: transform 0.5s ease;
-        }
-        
-        #info-panel.visible {
-            transform: translateX(0);
-        }
-        
-        #close-info {
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            background: none;
             border: none;
-            color: white;
-            font-size: 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .question {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .options label {
+            display: block;
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #f9f9f9;
+            border-radius: 5px;
             cursor: pointer;
         }
-        
-        .controls {
-            position: absolute;
-            bottom: 90px;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            color: #ccc;
+        .options label:hover {
+            background-color: #e9e9e9;
+        }
+        .options input {
+            width: auto;
+            margin-right: 10px;
+        }
+        .result-item {
+            background: #f9f9f9;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div id="canvas-container">
-        <!-- 3D сцена будет отрисована здесь -->
-    </div>
-    
-    <div id="ui-container">
-        <div class="planet-selector">
-            <div class="planet-btn" id="sun" title="Солнце"></div>
-            <div class="planet-btn" id="mercury" title="Меркурий"></div>
-            <div class="planet-btn" id="venus" title="Венера"></div>
-            <div class="planet-btn" id="earth" title="Земля"></div>
-            <div class="planet-btn" id="mars" title="Марс"></div>
-            <div class="planet-btn" id="jupiter" title="Юпитер"></div>
-            <div class="planet-btn" id="saturn" title="Сатурн"></div>
-            <div class="planet-btn" id="uranus" title="Уран"></div>
-            <div class="planet-btn" id="neptune" title="Нептун"></div>
-            <div class="planet-btn" id="pluto" title="Плутон"></div>
-        </div>
-    </div>
-    
-    <div class="controls">
-        <p>Используйте колесо мыши для приближения/отдаления</p>
-        <p>Зажмите левую кнопку мыши для вращения</p>
-    </div>
-    
-    <div id="info-panel">
-        <button id="close-info">×</button>
-        <h2 id="planet-name"></h2>
-        <p id="planet-description"></p>
+    <!-- Экран ввода данных -->
+    <div id="userInfoScreen" class="screen">
+        <h1>Психологический тест</h1>
+        <p>Пройдите тест, чтобы узнать больше о своем психологическом портрете</p>
+        
+        <label for="userName">Ваше имя:</label>
+        <input type="text" id="userName" placeholder="Введите ваше имя">
+        
+        <label for="userBirthdate">Дата рождения:</label>
+        <input type="date" id="userBirthdate">
+        
+        <label for="userGender">Ваш пол:</label>
+        <select id="userGender">
+            <option value="male">Мужской</option>
+            <option value="female">Женский</option>
+        </select>
+        
+        <button id="startTest">Начать тест</button>
     </div>
 
-    <!-- Подключаем Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
-    
+    <!-- Экран теста -->
+    <div id="testScreen" class="screen hidden">
+        <h2>Ответьте на вопросы</h2>
+        <div id="questionsContainer"></div>
+        <button id="submitTest">Получить результат</button>
+    </div>
+
+    <!-- Экран результатов -->
+    <div id="resultScreen" class="screen hidden">
+        <h2>Ваш психологический портрет</h2>
+        <div id="resultContent"></div>
+        <button id="viewResults">Посмотреть все результаты</button>
+        <button id="newTest">Пройти тест заново</button>
+    </div>
+
+    <!-- Экран истории результатов -->
+    <div id="historyScreen" class="screen hidden">
+        <h2>История ваших результатов</h2>
+        <div id="historyContent"></div>
+        <button id="backToResults">Назад к результатам</button>
+    </div>
+
     <script>
-        // Основные переменные
-        let scene, camera, renderer, controls;
-        let planets = {};
-        let stars = [];
-        
-        // Инициализация сцены
-        function init() {
-            // Создаем сцену
-            scene = new THREE.Scene();
-            
-            // Создаем камеру
-            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.z = 50;
-            
-            // Создаем рендерер
-            renderer = new THREE.WebGLRenderer({ antialias: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
-            document.getElementById('canvas-container').appendChild(renderer.domElement);
-            
-            // Добавляем управление камерой
-            controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.enableDamping = true;
-            controls.dampingFactor = 0.05;
-            
-            // Создаем освещение
-            const ambientLight = new THREE.AmbientLight(0x333333);
-            scene.add(ambientLight);
-            
-            const sunLight = new THREE.PointLight(0xffffff, 1.5);
-            scene.add(sunLight);
-            
-            // Создаем звездное небо
-            createStarField();
-            
-            // Создаем солнечную систему
-            createSolarSystem();
-            
-            // Обработка событий
-            setupEventListeners();
-            
-            // Запускаем анимацию
-            animate();
-            
-            // Обработка изменения размера окна
-            window.addEventListener('resize', onWindowResize);
-        }
-        
-        // Создание звездного неба
-        function createStarField() {
-            const starGeometry = new THREE.BufferGeometry();
-            const starMaterial = new THREE.PointsMaterial({
-                color: 0xffffff,
-                size: 0.1,
-            });
-            
-            const starVertices = [];
-            for (let i = 0; i < 10000; i++) {
-                const x = (Math.random() - 0.5) * 2000;
-                const y = (Math.random() - 0.5) * 2000;
-                const z = (Math.random() - 0.5) * 2000;
-                starVertices.push(x, y, z);
+        // Данные теста
+        const testQuestions = [
+            {
+                question: "Как вы обычно реагируете на стрессовые ситуации?",
+                options: [
+                    "Стараюсь сохранять спокойствие и искать решение",
+                    "Нуждаюсь в поддержке и совете близких",
+                    "Становлюсь раздражительным и эмоциональным",
+                    "Отстраняюсь и стараюсь побыть один",
+                    "Активно действую, чтобы решить проблему"
+                ]
+            },
+            {
+                question: "Что для вас важнее в общении с людьми?",
+                options: [
+                    "Честность и прямота",
+                    "Взаимопонимание и эмоциональная связь",
+                    "Веселье и позитивная атмосфера",
+                    "Глубокие, содержательные разговоры",
+                    "Практическая польза от общения"
+                ]
+            },
+            {
+                question: "Как вы принимаете важные решения?",
+                options: [
+                    "Тщательно анализирую все варианты",
+                    "Прислушиваюсь к своей интуиции",
+                    "Советуюсь с близкими или экспертами",
+                    "Действую импульсивно, по настроению",
+                    "Выбираю самый практичный вариант"
+                ]
+            },
+            {
+                question: "Что лучше описывает ваш подход к работе?",
+                options: [
+                    "Ставлю цели и систематически их достигаю",
+                    "Ищу творческий подход и вдохновение",
+                    "Работаю в комфортном, спокойном темпе",
+                    "Много общаюсь с коллегами, работа в команде",
+                    "Беру на себя ответственность и веду за собой"
+                ]
+            },
+            {
+                question: "Как вы проводите свободное время?",
+                options: [
+                    "Занимаюсь саморазвитием, читаю, учусь",
+                    "Встречаюсь с друзьями, общаюсь",
+                    "Занимаюсь творчеством или хобби",
+                    "Отдыхаю дома, смотрю фильмы",
+                    "Активный отдых, спорт, путешествия"
+                ]
+            },
+            {
+                question: "Как вы ведете себя в конфликтных ситуациях?",
+                options: [
+                    "Стараюсь найти компромисс",
+                    "Избегаю конфликтов, уступаю",
+                    "Отстаиваю свою позицию активно",
+                    "Анализирую причины конфликта",
+                    "Обращаюсь к третьей стороне для помощи"
+                ]
+            },
+            {
+                question: "Что для вас значит успех?",
+                options: [
+                    "Достижение поставленных целей",
+                    "Гармония в личной жизни",
+                    "Признание окружающих",
+                    "Возможность самореализации",
+                    "Финансовая стабильность и безопасность"
+                ]
+            },
+            {
+                question: "Как вы учитесь новому?",
+                options: [
+                    "Систематически, по плану",
+                    "Через практику и опыт",
+                    "В процессе общения с другими",
+                    "Интуитивно, методом проб и ошибок",
+                    "Только когда это действительно необходимо"
+                ]
+            },
+            {
+                question: "Как вы проявляете заботу о близких?",
+                options: [
+                    "Помогаю практическими действиями",
+                    "Поддерживаю эмоционально, выслушиваю",
+                    "Дарю подарки, делаю сюрпризы",
+                    "Провожу с ними много времени",
+                    "Даю советы, помогаю решать проблемы"
+                ]
+            },
+            {
+                question: "Что вас мотивирует?",
+                options: [
+                    "Чувство долга и ответственности",
+                    "Желание помогать другим",
+                    "Стремление к признанию",
+                    "Интерес и любопытство",
+                    "Личный рост и развитие"
+                ]
             }
-            
-            starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
-            const starField = new THREE.Points(starGeometry, starMaterial);
-            scene.add(starField);
+        ];
+
+        // Типы личности по результатам теста
+        const personalityTypes = {
+            "Аналитик": {
+                description: "Вы логичны, рациональны и цените знания. Принимаете решения на основе анализа, а не эмоций.",
+                traits: ["рациональность", "любознательность", "независимость", "критическое мышление"]
+            },
+            "Эмпат": {
+                description: "Вы чувствительны к эмоциям других, заботливы и стремитесь к гармонии в отношениях.",
+                traits: ["чувствительность", "заботливость", "дипломатичность", "интуитивность"]
+            },
+            "Лидер": {
+                description: "Вы уверены в себе, решительны и умеете вдохновлять других. Прирожденный организатор.",
+                traits: ["уверенность", "решительность", "амбициозность", "ответственность"]
+            },
+            "Творец": {
+                description: "Вы креативны, оригинальны и цените самовыражение. Видите мир под уникальным углом.",
+                traits: ["креативность", "оригинальность", "гибкость", "мечтательность"]
+            },
+            "Хранитель": {
+                description: "Вы надежны, практичны и цените стабильность. На вас можно положиться в любой ситуации.",
+                traits: ["надежность", "практичность", "лояльность", "традиционность"]
+            }
+        };
+
+        // Элементы DOM
+        const userInfoScreen = document.getElementById('userInfoScreen');
+        const testScreen = document.getElementById('testScreen');
+        const resultScreen = document.getElementById('resultScreen');
+        const historyScreen = document.getElementById('historyScreen');
+        const questionsContainer = document.getElementById('questionsContainer');
+        const resultContent = document.getElementById('resultContent');
+        const historyContent = document.getElementById('historyContent');
+
+        // Кнопки
+        const startTestBtn = document.getElementById('startTest');
+        const submitTestBtn = document.getElementById('submitTest');
+        const viewResultsBtn = document.getElementById('viewResults');
+        const newTestBtn = document.getElementById('newTest');
+        const backToResultsBtn = document.getElementById('backToResults');
+
+        // Текущие данные пользователя
+        let currentUser = {};
+        let userAnswers = [];
+
+        // Инициализация теста
+        function initTest() {
+            // Создаем вопросы
+            questionsContainer.innerHTML = '';
+            testQuestions.forEach((question, index) => {
+                const questionElement = document.createElement('div');
+                questionElement.className = 'question';
+                questionElement.innerHTML = `
+                    <h3>${index + 1}. ${question.question}</h3>
+                    <div class="options">
+                        ${question.options.map((option, optionIndex) => `
+                            <label>
+                                <input type="radio" name="question${index}" value="${optionIndex}">
+                                ${option}
+                            </label>
+                        `).join('')}
+                    </div>
+                `;
+                questionsContainer.appendChild(questionElement);
+            });
         }
-        
-        // Создание солнечной системы
-        function createSolarSystem() {
-            // Создаем Солнце
-            const sunGeometry = new THREE.SphereGeometry(5, 32, 32);
-            const sunTexture = new THREE.TextureLoader().load('https://space-assets-1.s3.us-east-2.amazonaws.com/sun.jpg');
-            const sunMaterial = new THREE.MeshBasicMaterial({ 
-                map: sunTexture,
-                emissive: 0xffff00,
-                emissiveIntensity: 0.5
-            });
-            const sun = new THREE.Mesh(sunGeometry, sunMaterial);
-            scene.add(sun);
-            planets.sun = sun;
+
+        // Расчет нумерологического числа
+        function calculateLifePathNumber(birthdate) {
+            const date = new Date(birthdate);
+            const day = date.getDate();
+            const month = date.getMonth() + 1;
+            const year = date.getFullYear();
             
-            // Создаем орбиты и планеты
-            createPlanet('mercury', 1, 0.4, 7, 0.01, 'https://space-assets-1.s3.us-east-2.amazonaws.com/mercury.jpg');
-            createPlanet('venus', 2, 0.6, 10, 0.007, 'https://space-assets-1.s3.us-east-2.amazonaws.com/venus.jpg');
-            
-            // Земля с луной
-            const earthGroup = new THREE.Group();
-            scene.add(earthGroup);
-            
-            const earth = createPlanet('earth', 3, 0.6, 13, 0.005, 'https://space-assets-1.s3.us-east-2.amazonaws.com/earth.jpg', earthGroup);
-            
-            // Луна
-            const moonGeometry = new THREE.SphereGeometry(0.2, 32, 32);
-            const moonTexture = new THREE.TextureLoader().load('https://space-assets-1.s3.us-east-2.amazonaws.com/moon.jpg');
-            const moonMaterial = new THREE.MeshStandardMaterial({ map: moonTexture });
-            const moon = new THREE.Mesh(moonGeometry, moonMaterial);
-            moon.position.set(1, 0, 0);
-            earth.add(moon);
-            
-            // Другие планеты
-            createPlanet('mars', 4, 0.5, 16, 0.004, 'https://space-assets-1.s3.us-east-2.amazonaws.com/mars.jpg');
-            
-            // Юпитер
-            createPlanet('jupiter', 6, 1.2, 22, 0.003, 'https://space-assets-1.s3.us-east-2.amazonaws.com/jupiter.jpg');
-            
-            // Сатурн с кольцами
-            const saturnGroup = new THREE.Group();
-            scene.add(saturnGroup);
-            
-            const saturn = createPlanet('saturn', 7, 1.0, 28, 0.002, 'https://space-assets-1.s3.us-east-2.amazonaws.com/saturn.jpg', saturnGroup);
-            
-            // Кольца Сатурна
-            const ringGeometry = new THREE.RingGeometry(1.2, 2, 32);
-            const ringTexture = new THREE.TextureLoader().load('https://space-assets-1.s3.us-east-2.amazonaws.com/saturn_rings.png');
-            const ringMaterial = new THREE.MeshBasicMaterial({ 
-                map: ringTexture, 
-                side: THREE.DoubleSide,
-                transparent: true
-            });
-            const rings = new THREE.Mesh(ringGeometry, ringMaterial);
-            rings.rotation.x = Math.PI / 2;
-            saturn.add(rings);
-            
-            // Остальные планеты
-            createPlanet('uranus', 5, 0.8, 34, 0.0015, 'https://space-assets-1.s3.us-east-2.amazonaws.com/uranus.jpg');
-            createPlanet('neptune', 5, 0.8, 40, 0.001, 'https://space-assets-1.s3.us-east-2.amazonaws.com/neptune.jpg');
-            
-            // Плутон (карликовая планета)
-            createPlanet('pluto', 2, 0.3, 45, 0.0007, 'https://space-assets-1.s3.us-east-2.amazonaws.com/pluto.jpg');
-        }
-        
-        // Функция для создания планет
-        function createPlanet(name, orbitRadius, size, orbitSpeed, rotationSpeed, textureUrl, parent = scene) {
-            // Группа для планеты и её орбиты
-            const group = new THREE.Group();
-            parent.add(group);
-            
-            // Орбита
-            const orbit = new THREE.RingGeometry(orbitRadius, orbitRadius + 0.01, 64);
-            const orbitMaterial = new THREE.MeshBasicMaterial({ 
-                color: 0x444444, 
-                side: THREE.DoubleSide,
-                transparent: true,
-                opacity: 0.3
-            });
-            const orbitMesh = new THREE.Mesh(orbit, orbitMaterial);
-            orbitMesh.rotation.x = Math.PI / 2;
-            group.add(orbitMesh);
-            
-            // Планета
-            const geometry = new THREE.SphereGeometry(size, 32, 32);
-            const texture = new THREE.TextureLoader().load(textureUrl);
-            const material = new THREE.MeshStandardMaterial({ map: texture });
-            const planet = new THREE.Mesh(geometry, material);
-            
-            // Позиционируем планету на орбите
-            planet.position.set(orbitRadius, 0, 0);
-            group.add(planet);
-            
-            // Сохраняем параметры для анимации
-            planet.userData = {
-                orbitRadius: orbitRadius,
-                orbitSpeed: orbitSpeed,
-                rotationSpeed: rotationSpeed,
-                angle: Math.random() * Math.PI * 2
+            const sumDigits = (num) => {
+                let sum = 0;
+                while (num) {
+                    sum += num % 10;
+                    num = Math.floor(num / 10);
+                }
+                return sum;
             };
             
-            // Добавляем в коллекцию планет
-            planets[name] = planet;
+            let lifePathNumber = sumDigits(day) + sumDigits(month) + sumDigits(year);
             
-            return planet;
+            while (lifePathNumber > 9 && lifePathNumber !== 11 && lifePathNumber !== 22 && lifePathNumber !== 33) {
+                lifePathNumber = sumDigits(lifePathNumber);
+            }
+            
+            return lifePathNumber;
         }
-        
-        // Анимация
-        function animate() {
-            requestAnimationFrame(animate);
+
+        // Описание нумерологических чисел
+        function getNumerologyDescription(number) {
+            const descriptions = {
+                1: "Лидер, новатор, независимый. Вы обладаете сильной волей и стремитесь к достижению целей.",
+                2: "Дипломат, миротворец, чувствительный. Вы цените гармонию и сотрудничество.",
+                3: "Творец, оптимист, общительный. Вы обладаете художественными талантами и даром самовыражения.",
+                4: "Практик, строитель, надежный. Вы цените стабильность и системный подход.",
+                5: "Исследователь, новатор, свободолюбивый. Вы стремитесь к разнообразию и приключениям.",
+                6: "Заботливый, ответственный, гармонизатор. Вы стремитесь к служению и созданию уюта.",
+                7: "Аналитик, мудрец, искатель истины. Вы цените знания и самоанализ.",
+                8: "Организатор, авторитет, амбициозный. Вы стремитесь к успеху и материальному благополучию.",
+                9: "Гуманист, альтруист, сострадательный. Вы обладаете широким кругозором и стремитесь помогать другим.",
+                11: "Просветитель, вдохновитель, интуитивный. Вы обладаете повышенной чувствительностью и духовностью.",
+                22: "Строитель, мастер-творец, практичный идеалист. Вы способны воплощать грандиозные планы в реальность.",
+                33: "Учитель, служитель человечества, сострадательный лидер. Вы обладаете высшей степенью заботы о других."
+            };
             
-            // Анимация планет
-            for (const name in planets) {
-                const planet = planets[name];
-                if (planet.userData) {
-                    // Движение по орбите
-                    planet.userData.angle += planet.userData.orbitSpeed;
-                    planet.position.x = Math.cos(planet.userData.angle) * planet.userData.orbitRadius;
-                    planet.position.z = Math.sin(planet.userData.angle) * planet.userData.orbitRadius;
+            return descriptions[number] || "Уникальная и многогранная личность с особым предназначением.";
+        }
+
+        // Определение типа личности по ответам
+        function determinePersonalityType(answers) {
+            // Подсчет баллов для каждого типа
+            const scores = {
+                "Аналитик": 0,
+                "Эмпат": 0,
+                "Лидер": 0,
+                "Творец": 0,
+                "Хранитель": 0
+            };
+            
+            // Каждый ответ добавляет баллы определенному типу
+            answers.forEach((answer, index) => {
+                switch(answer) {
+                    case 0: scores["Аналитик"] += 1; break;
+                    case 1: scores["Эмпат"] += 1; break;
+                    case 2: scores["Лидер"] += 1; break;
+                    case 3: scores["Творец"] += 1; break;
+                    case 4: scores["Хранитель"] += 1; break;
+                }
+            });
+            
+            // Находим тип с максимальным количеством баллов
+            let maxScore = 0;
+            let personalityType = "Аналитик";
+            
+            for (const [type, score] of Object.entries(scores)) {
+                if (score > maxScore) {
+                    maxScore = score;
+                    personalityType = type;
+                }
+            }
+            
+            return personalityType;
+        }
+
+        // Сохранение результатов
+        function saveResult(user, personalityType, numerologyNumber) {
+            const results = JSON.parse(localStorage.getItem('psychTestResults')) || [];
+            const result = {
+                id: Date.now(),
+                name: user.name,
+                birthdate: user.birthdate,
+                gender: user.gender,
+                personalityType: personalityType,
+                numerologyNumber: numerologyNumber,
+                date: new Date().toLocaleDateString('ru-RU')
+            };
+            
+            results.push(result);
+            localStorage.setItem('psychTestResults', JSON.stringify(results));
+            
+            return result;
+        }
+
+        // Показать историю результатов
+        function showHistory() {
+            const results = JSON.parse(localStorage.getItem('psychTestResults')) || [];
+            
+            if (results.length === 0) {
+                historyContent.innerHTML = '<p>У вас пока нет сохраненных результатов.</p>';
+                return;
+            }
+            
+            historyContent.innerHTML = results.map(result => `
+                <div class="result-item">
+                    <h3>${result.name} (${result.date})</h3>
+                    <p><strong>Психотип:</strong> ${result.personalityType}</p>
+                    <p><strong>Число жизненного пути:</strong> ${result.numerologyNumber}</p>
+                    <p><strong>Описание по нумерологии:</strong> ${getNumerologyDescription(result.numerologyNumber)}</p>
+                </div>
+            `).join('');
+        }
+
+        // Обработчики событий
+        startTestBtn.addEventListener('click', () => {
+            const name = document.getElementById('userName').value;
+            const birthdate = document.getElementById('userBirthdate').value;
+            const gender = document.getElementById('userGender').value;
+            
+            if (!name || !birthdate) {
+                alert('Пожалуйста, заполните все поля');
+                return;
+            }
+            
+            currentUser = { name, birthdate, gender };
+            userInfoScreen.classList.add('hidden');
+            testScreen.classList.remove('hidden');
+        });
+
+        submitTestBtn.addEventListener('click', () => {
+            // Собираем ответы
+            userAnswers = [];
+            let allAnswered = true;
+            
+            testQuestions.forEach((_, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                if (selectedOption) {
+                    userAnswers.push(parseInt(selectedOption.value));
+                } else {
+                    allAnswered = false;
+                }
+            });
+            
+            if (!allAnswered) {
+                alert('Пожалуйста, ответьте на все вопросы');
+                return;
+            }
+            
+            // Определяем тип личности
+            const personalityType = determinePersonalityType(userAnswers);
+            const numerologyNumber = calculateLifePathNumber(currentUser.birthdate);
+            
+            // Сохраняем результат
+            const result = saveResult(currentUser, personalityType, numerologyNumber);
+            
+            // Показываем результат
+            resultContent.innerHTML = `
+                <div class="result-item">
+                    <h3>${currentUser.name}, ваш психологический портрет</h3>
+                    <p><strong>Ваш психотип:</strong> ${personalityType}</p>
+                    <p>${personalityTypes[personalityType].description}</p>
+                    <p><strong>Характерные черты:</strong> ${personalityTypes[personalityType].traits.join(', ')}</p>
                     
-                    // Вращение вокруг своей оси
-                    planet.rotation.y += planet.userData.rotationSpeed;
-                }
-            }
+                    <p><strong>Ваше число жизненного пути (по нумерологии):</strong> ${numerologyNumber}</p>
+                    <p>${getNumerologyDescription(numerologyNumber)}</p>
+                    
+                    <p><strong>Дата тестирования:</strong> ${result.date}</p>
+                </div>
+            `;
             
-            controls.update();
-            renderer.render(scene, camera);
-        }
-        
-        // Обработка событий
-        function setupEventListeners() {
-            // Кнопки выбора планет
-            const planetButtons = document.querySelectorAll('.planet-btn');
-            planetButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const planetId = button.id;
-                    focusOnPlanet(planetId);
-                    showPlanetInfo(planetId);
-                });
-            });
+            testScreen.classList.add('hidden');
+            resultScreen.classList.remove('hidden');
+        });
+
+        viewResultsBtn.addEventListener('click', () => {
+            showHistory();
+            resultScreen.classList.add('hidden');
+            historyScreen.classList.remove('hidden');
+        });
+
+        newTestBtn.addEventListener('click', () => {
+            userAnswers = [];
+            currentUser = {};
+            document.getElementById('userName').value = '';
+            document.getElementById('userBirthdate').value = '';
+            document.getElementById('userGender').value = 'male';
             
-            // Кнопка закрытия информации
-            document.getElementById('close-info').addEventListener('click', () => {
-                document.getElementById('info-panel').classList.remove('visible');
-            });
-        }
-        
-        // Фокусировка на планете
-        function focusOnPlanet(planetId) {
-            const planet = planets[planetId];
-            if (planet) {
-                // Плавное перемещение камеры к планете
-                const focusDistance = planetId === 'sun' ? 10 : 5;
-                
-                // Определяем позицию для камеры
-                const targetPosition = planet.position.clone();
-                
-                // Для внешних планет учитываем смещение группы
-                if (planet.parent !== scene) {
-                    targetPosition.add(planet.parent.position);
-                }
-                
-                // Создаем анимацию перемещения камеры
-                animateCamera(camera.position.clone(), targetPosition, focusDistance);
-            }
-        }
-        
-        // Анимация камеры
-        function animateCamera(from, to, distance) {
-            const direction = new THREE.Vector3().subVectors(camera.position, to).normalize();
-            const targetPosition = to.clone().add(direction.multiplyScalar(distance));
-            
-            // В реальной реализации здесь должна быть плавная анимация
-            // Для простоты просто устанавливаем позицию
-            camera.position.copy(targetPosition);
-            controls.target.copy(to);
-        }
-        
-        // Показ информации о планете
-        function showPlanetInfo(planetId) {
-            const infoPanel = document.getElementById('info-panel');
-            const planetName = document.getElementById('planet-name');
-            const planetDescription = document.getElementById('planet-description');
-            
-            const planetInfo = {
-                sun: {
-                    name: "Солнце",
-                    description: "Звезда в центре Солнечной системы. Состоит в основном из водорода и гелия. Диаметр: 1 391 000 км."
-                },
-                mercury: {
-                    name: "Меркурий",
-                    description: "Ближайшая к Солнцу планета. Не имеет естественных спутников. Температура поверхности от -180°C до +430°C."
-                },
-                venus: {
-                    name: "Венера",
-                    description: "Вторая планета от Солнца. Имеет плотную атмосферу из углекислого газа. Температура поверхности около 460°C."
-                },
-                earth: {
-                    name: "Земля",
-                    description: "Третья планета от Солнца. Единственное известное тело во Вселенной, населенное живыми организмами. Имеет один естественный спутник — Луну."
-                },
-                mars: {
-                    name: "Марс",
-                    description: "Четвертая планета от Солнца. Имеет два естественных спутника — Фобос и Деймос. Известен как 'Красная планета'."
-                },
-                jupiter: {
-                    name: "Юпитер",
-                    description: "Пятая и крупнейшая планета Солнечной системы. Газовый гигант. Имеет 79 известных спутников."
-                },
-                saturn: {
-                    name: "Сатурн",
-                    description: "Шестая планета от Солнца. Известна своими кольцами, состоящими из частичек льда и камня. Имеет 82 подтвержденных спутника."
-                },
-                uranus: {
-                    name: "Уран",
-                    description: "Седьмая планета от Солнца. Первая планета, обнаруженная с помощью телескопа. Имеет 27 известных спутников."
-                },
-                neptune: {
-                    name: "Нептун",
-                    description: "Восьмая и самая дальняя от Солнца планета. Открыта путем математических расчетов. Имеет 14 известных спутников."
-                },
-                pluto: {
-                    name: "Плутон",
-                    description: "Карликовая планета в поясе Койпера. Ранее считался девятой планетой. Имеет 5 известных спутников, крупнейший — Харон."
-                }
-            };
-            
-            if (planetInfo[planetId]) {
-                planetName.textContent = planetInfo[planetId].name;
-                planetDescription.textContent = planetInfo[planetId].description;
-                infoPanel.classList.add('visible');
-            }
-        }
-        
-        // Обработка изменения размера окна
-        function onWindowResize() {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        }
-        
-        // Запускаем инициализацию после загрузки страницы
-        window.addEventListener('load', init);
+            resultScreen.classList.add('hidden');
+            userInfoScreen.classList.remove('hidden');
+        });
+
+        backToResultsBtn.addEventListener('click', () => {
+            historyScreen.classList.add('hidden');
+            resultScreen.classList.remove('hidden');
+        });
+
+        // Инициализация при загрузке
+        document.addEventListener('DOMContentLoaded', initTest);
     </script>
 </body>
 </html>
