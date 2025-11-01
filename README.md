@@ -416,7 +416,7 @@
         
         .portrait-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
             margin-top: 1.5rem;
         }
@@ -426,6 +426,12 @@
             border-radius: 8px;
             padding: 1.5rem;
             box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .portrait-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         .portrait-card h4 {
@@ -437,11 +443,17 @@
         }
         
         .portrait-number {
-            font-size: 1.8rem;
+            font-size: 2.5rem;
             font-weight: bold;
             color: var(--accent);
             text-align: center;
             margin: 0.5rem 0;
+        }
+        
+        .portrait-description {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            line-height: 1.5;
         }
         
         /* Стили для выбора метода расчета совместимости */
@@ -985,7 +997,7 @@
                 <!-- Нумерологический портрет -->
                 <div class="calculator-form" id="portrait-form" style="display: none;">
                     <h3>Нумерологический портрет личности</h3>
-                    <p>Полный анализ личности по Ф.И.О. с расчетом всех основных чисел</p>
+                    <p>Полный анализ личности по Ф.И.О. с расчетом всех основных чисел и подробной расшифровкой</p>
                     
                     <div class="form-group">
                         <label for="full-name">Фамилия Имя Отчество</label>
@@ -1001,51 +1013,53 @@
                     
                     <div class="calculator-result" id="portrait-result">
                         <h3>Ваш нумерологический портрет</h3>
+                        <p class="portrait-intro">На основе вашего Ф.И.О. и даты рождения мы рассчитали ключевые нумерологические числа, которые раскрывают вашу личность, таланты и жизненный путь.</p>
+                        
                         <div class="portrait-grid">
                             <div class="portrait-card">
                                 <h4><i class="fas fa-user"></i> Число Жизненного Пути</h4>
                                 <div class="portrait-number" id="portrait-life-path"></div>
-                                <p id="portrait-life-path-desc"></p>
+                                <div class="portrait-description" id="portrait-life-path-desc"></div>
                             </div>
                             
                             <div class="portrait-card">
                                 <h4><i class="fas fa-star"></i> Число Судьбы</h4>
                                 <div class="portrait-number" id="portrait-destiny"></div>
-                                <p id="portrait-destiny-desc"></p>
+                                <div class="portrait-description" id="portrait-destiny-desc"></div>
                             </div>
                             
                             <div class="portrait-card">
                                 <h4><i class="fas fa-heart"></i> Число Души</h4>
                                 <div class="portrait-number" id="portrait-soul"></div>
-                                <p id="portrait-soul-desc"></p>
+                                <div class="portrait-description" id="portrait-soul-desc"></div>
                             </div>
                             
                             <div class="portrait-card">
                                 <h4><i class="fas fa-eye"></i> Число Внешнего Облика</h4>
                                 <div class="portrait-number" id="portrait-appearance"></div>
-                                <p id="portrait-appearance-desc"></p>
+                                <div class="portrait-description" id="portrait-appearance-desc"></div>
                             </div>
                             
                             <div class="portrait-card">
                                 <h4><i class="fas fa-birthday-cake"></i> Число Дня Рождения</h4>
                                 <div class="portrait-number" id="portrait-birthday"></div>
-                                <p id="portrait-birthday-desc"></p>
+                                <div class="portrait-description" id="portrait-birthday-desc"></div>
                             </div>
                             
                             <div class="portrait-card">
                                 <h4><i class="fas fa-balance-scale"></i> Число Кармического Долга</h4>
                                 <div class="portrait-number" id="portrait-karmic"></div>
-                                <p id="portrait-karmic-desc"></p>
+                                <div class="portrait-description" id="portrait-karmic-desc"></div>
                             </div>
                         </div>
                         
                         <div class="strengths">
-                            <h4><i class="fas fa-star"></i> Ваши ключевые качества</h4>
+                            <h4><i class="fas fa-star"></i> Ваши ключевые качества и таланты</h4>
                             <p id="portrait-strengths"></p>
                         </div>
                         
                         <div class="weaknesses">
-                            <h4><i class="fas fa-exclamation-triangle"></i> Зоны развития</h4>
+                            <h4><i class="fas fa-exclamation-triangle"></i> Зоны развития и вызовы</h4>
                             <p id="portrait-weaknesses"></p>
                         </div>
                         
@@ -1247,6 +1261,7 @@
             return num;
         }
         
+        // Функции для жизненного пути
         function getLifePathDescription(number) {
             const descriptions = {
                 1: "Вы - прирожденный лидер, независимый и амбициозный. Ваше предназначение - вести других, проявлять инициативу и создавать новое. Вы обладаете сильной волей и оригинальным мышлением, способны вдохновлять людей на свершения.",
@@ -1664,7 +1679,220 @@
             document.getElementById('planning-result').style.display = 'block';
         });
         
-        // Остальные калькуляторы (матрица и портрет) остаются без изменений
+        // Функции для нумерологического портрета
+        function getPortraitDescription(number, type) {
+            const descriptions = {
+                'lifePath': {
+                    1: "Число Жизненного Пути 1 означает, что вы - прирожденный лидер и новатор. Ваша основная задача - учиться самостоятельности и проявлять инициативу. Вы созданы, чтобы вести других, а не следовать за кем-то. Ваша энергия направлена на создание нового и преобразование окружающего мира.",
+                    2: "Число Жизненного Пути 2 указывает на вашу дипломатичность и чувствительность. Вы - миротворец, который стремится к гармонии и сотрудничеству. Ваша сила в умении слушать, понимать и объединять людей. Вы прекрасный партнер и командный игрок.",
+                    3: "Число Жизненного Пути 3 раскрывает вашу творческую природу и оптимизм. Вы созданы для самовыражения, общения и распространения радости. Ваш дар - вдохновлять других через искусство, слова и позитивную энергию.",
+                    4: "Число Жизненного Пути 4 делает вас практичным строителем и организатором. Вы цените стабильность, надежность и порядок. Ваша миссия - создавать прочные основы и систематизировать процессы для долгосрочного успеха.",
+                    5: "Число Жизненного Пути 5 наделяет вас свободолюбием и любознательностью. Вы - исследователь, который жаждет разнообразия и новых впечатлений. Ваш путь - постоянное движение, обучение и адаптация к изменениям.",
+                    6: "Число Жизненного Пути 6 указывает на вашу ответственность и заботливость. Вы - воспитатель, который находит fulfillment в служении семье и обществу. Ваша сила в создании гармонии, уюта и поддержки для близких.",
+                    7: "Число Жизненного Пути 7 раскрывает вашу аналитическую и духовную природу. Вы - мыслитель, который ищет глубину и истину. Ваш путь - самопознание, анализ и развитие интуиции.",
+                    8: "Число Жизненного Пути 8 делает вас амбициозным организатором и руководителем. Вы созданы для достижения материального успеха и управления ресурсами. Ваша сила в практической реализации идей.",
+                    9: "Число Жизненного Пути 9 указывает на ваш гуманизм и сострадание. Вы - филантроп, который служит человечеству и стремится к всеобщему благу. Ваша миссия - завершать циклы и нести любовь."
+                },
+                'destiny': {
+                    1: "Число Судьбы 1 означает, что ваше предназначение связано с лидерством и созданием нового. Вы должны научиться самостоятельности и уверенности в себе. Ваши таланты лучше всего раскрываются в предпринимательстве, управлении и инновационных проектах.",
+                    2: "Число Судьбы 2 указывает на ваше предназначение в создании гармонии и партнерства. Вы должны развивать дипломатичность и терпение. Ваши таланты раскрываются в медиации, консультировании и работе в команде.",
+                    3: "Число Судьбы 3 раскрывает ваше творческое предназначение. Вы должны развивать самовыражение и коммуникативные навыки. Ваши таланты лежат в области искусства, преподавания и публичных выступлений.",
+                    4: "Число Судьбы 4 означает практическое предназначение. Вы должны развивать дисциплину и организованность. Ваши таланты раскрываются в строительстве, инженерии и системном администрировании.",
+                    5: "Число Судьбы 5 указывает на предназначение, связанное со свободой и изменениями. Вы должны развивать адаптивность и любознательность. Ваши таланты раскрываются в путешествиях, продажах и коммуникациях.",
+                    6: "Число Судьбы 6 раскрывает ваше предназначение в служении и заботе. Вы должны развивать ответственность и эмпатию. Ваши таланты лежат в области медицины, преподавания и семейного консультирования.",
+                    7: "Число Судьбы 7 означает духовное и аналитическое предназначение. Вы должны развивать интуицию и критическое мышление. Ваши таланты раскрываются в исследованиях, психологии и эзотерике.",
+                    8: "Число Судьбы 8 указывает на материальное и организационное предназначение. Вы должны развивать деловую хватку и управленческие навыки. Ваши таланты лежат в области финансов, управления и предпринимательства.",
+                    9: "Число Судьбы 9 раскрывает ваше гуманитарное предназначение. Вы должны развивать сострадание и терпимость. Ваши таланты раскрываются в благотворительности, искусстве и международных отношениях."
+                },
+                'soul': {
+                    1: "Число Души 1 означает, что в глубине души вы стремитесь к независимости и самореализации. Ваши истинные желания связаны с лидерством, оригинальностью и достижением личных целей.",
+                    2: "Число Души 2 указывает на вашу глубокую потребность в гармонии и партнерстве. Вы искренне желаете любви, поддержки и эмоциональной связи с другими людьми.",
+                    3: "Число Души 3 раскрывает вашу внутреннюю потребность в творческом самовыражении и радости. Вы жаждете признания, восхищения и возможности делиться своим оптимизмом.",
+                    4: "Число Души 4 означает, что в глубине души вы цените стабильность и безопасность. Ваши истинные желания связаны с созданием прочного фундамента и надежных отношений.",
+                    5: "Число Души 5 указывает на вашу внутреннюю жажду свободы и приключений. Вы искренне желаете разнообразия, новых впечатлений и отсутствия ограничений.",
+                    6: "Число Души 6 раскрывает вашу глубокую потребность в любви и семейном счастье. Вы жаждете гармонии в отношениях и возможности заботиться о близких.",
+                    7: "Число Души 7 означает, что в глубине души вы стремитесь к мудрости и духовному росту. Ваши истинные желания связаны с пониманием тайн жизни и самопознанием.",
+                    8: "Число Души 8 указывает на вашу внутреннюю потребность в признании и материальном успехе. Вы искренне желаете власти, влияния и финансовой стабильности.",
+                    9: "Число Души 9 раскрывает вашу глубокую потребность в служении и всеобщей любви. Вы жаждете сделать мир лучше и помочь тем, кто в этом нуждается."
+                },
+                'appearance': {
+                    1: "Число Внешнего Облика 1 создает впечатление уверенного, независимого и амбициозного человека. Окружающие видят в вас лидера, который знает, чего хочет, и умеет этого достигать.",
+                    2: "Число Внешнего Облика 2 создает образ дипломатичного, дружелюбного и тактичного человека. Люди воспринимают вас как приятного собеседника и надежного партнера.",
+                    3: "Число Внешнего Облика 3 формирует впечатление творческого, обаятельного и оптимистичного человека. Окружающие видят в вас источник вдохновения и позитивной энергии.",
+                    4: "Число Внешнего Облика 4 создает образ надежного, практичного и ответственного человека. Люди воспринимают вас как стабильного и заслуживающего доверия партнера.",
+                    5: "Число Внешнего Облика 5 формирует впечатление свободолюбивого, динамичного и адаптивного человека. Окружающие видят в вас интересного и непредсказуемого собеседника.",
+                    6: "Число Внешнего Облика 6 создает образ заботливого, ответственного и гармоничного человека. Люди воспринимают вас как надежную опору и источник поддержки.",
+                    7: "Число Внешнего Облика 7 формирует впечатление мудрого, сдержанного и глубокомыслящего человека. Окружающие видят в вас источник мудрости и интуитивных прозрений.",
+                    8: "Число Внешнего Облика 8 создает образ успешного, авторитетного и эффективного человека. Люди воспринимают вас как лидера, способного достигать поставленных целей.",
+                    9: "Число Внешнего Облика 9 формирует впечатление великодушного, альтруистичного и духовного человека. Окружающие видят в вас источник мудрости и бескорыстной помощи."
+                },
+                'birthday': {
+                    1: "Число Дня Рождения 1 наделяет вас врожденными лидерскими качествами, инициативностью и оригинальностью. Вы рождены, чтобы быть первым и создавать новое.",
+                    2: "Число Дня Рождения 2 дает вам природную дипломатичность, чувствительность и способность к сотрудничеству. Вы рождены для создания гармонии и партнерства.",
+                    3: "Число Дня Рождения 3 наделяет вас врожденным творческим потенциалом, оптимизмом и коммуникабельностью. Вы рождены для самовыражения и распространения радости.",
+                    4: "Число Дня Рождения 4 дает вам природную практичность, организованность и надежность. Вы рождены для создания стабильности и прочных основ.",
+                    5: "Число Дня Рождения 5 наделяет вас врожденной адаптивностью, любознательностью и свободолюбием. Вы рождены для исследований и разнообразия.",
+                    6: "Число Дня Рождения 6 дает вам природную ответственность, заботливость и гармоничность. Вы рождены для служения семье и создания уюта.",
+                    7: "Число Дня Рождения 7 наделяет вас врожденной аналитичностью, интуицией и духовностью. Вы рождены для поиска истины и самопознания.",
+                    8: "Число Дня Рождения 8 дает вам природную амбициозность, практичность и эффективность. Вы рождены для достижения успеха и управления ресурсами.",
+                    9: "Число Дня Рождения 9 наделяет вас врожденным гуманизмом, состраданием и идеализмом. Вы рождены для служения человечеству и всеобщего блага."
+                },
+                'karmic': {
+                    1: "Число Кармического Долга 1 указывает на необходимость развивать независимость и уверенность в себе. В прошлых жизнях вы могли быть слишком зависимы от других, и теперь должны научиться стоять на собственных ногах.",
+                    2: "Число Кармического Долга 2 указывает на необходимость развивать сотрудничество и терпимость. В прошлом вы могли быть слишком эгоистичны, и теперь должны научиться учитывать интересы других.",
+                    3: "Число Кармического Долга 3 указывает на необходимость развивать самовыражение и радость жизни. В прошлых жизнях вы могли подавлять свои творческие способности, и теперь должны научиться их раскрывать.",
+                    4: "Число Кармического Долга 4 указывает на необходимость развивать дисциплину и практичность. В прошлом вы могли быть безответственны, и теперь должны научиться создавать прочные основы.",
+                    5: "Число Кармического Долга 5 указывает на необходимость развивать свободу и ответственность. В прошлых жизнях вы могли быть либо слишком ограничены, либо слишком безответственны, и теперь должны найти баланс.",
+                    6: "Число Кармического Долга 6 указывает на необходимость развивать любовь и заботу о других. В прошлом вы могли пренебрегать семейными обязанностями, и теперь должны научиться бескорыстной любви.",
+                    7: "Число Кармического Долга 7 указывает на необходимость развивать веру и духовность. В прошлых жизнях вы могли быть слишком материалистичны, и теперь должны открыться духовным истинам.",
+                    8: "Число Кармического Долга 8 указывает на необходимость развивать изобилие и щедрость. В прошлом вы могли злоупотреблять властью или богатством, и теперь должны научиться использовать ресурсы мудро.",
+                    9: "Число Кармического Долга 9 указывает на необходимость развивать служение и всепрощение. В прошлых жизнях вы могли быть эгоистичны, и теперь должны научиться бескорыстной помощи другим."
+                }
+            };
+            
+            return descriptions[type] && descriptions[type][number] 
+                ? descriptions[type][number] 
+                : "Описание для этого числа пока недоступно.";
+        }
+        
+        // Расчет нумерологического портрета
+        document.getElementById('calculate-portrait').addEventListener('click', function() {
+            const fullName = document.getElementById('full-name').value;
+            const birthDate = new Date(document.getElementById('portrait-birthdate').value);
+            
+            if (!fullName || isNaN(birthDate.getTime())) {
+                alert('Пожалуйста, заполните все поля');
+                return;
+            }
+            
+            // Расчет всех чисел для портрета
+            const day = birthDate.getDate();
+            const month = birthDate.getMonth() + 1;
+            const year = birthDate.getFullYear();
+            
+            const lifePathNumber = reduceNumber(reduceNumber(day) + reduceNumber(month) + reduceNumber(year));
+            const destinyNumber = calculateDestinyNumber(fullName);
+            const soulNumber = calculateSoulNumber(fullName);
+            const appearanceNumber = calculateAppearanceNumber(fullName);
+            const birthdayNumber = reduceNumber(day);
+            const karmicNumber = reduceNumber(day + month);
+            
+            // Заполнение данных портрета
+            document.getElementById('portrait-life-path').textContent = lifePathNumber;
+            document.getElementById('portrait-life-path-desc').innerHTML = getPortraitDescription(lifePathNumber, 'lifePath');
+            
+            document.getElementById('portrait-destiny').textContent = destinyNumber;
+            document.getElementById('portrait-destiny-desc').innerHTML = getPortraitDescription(destinyNumber, 'destiny');
+            
+            document.getElementById('portrait-soul').textContent = soulNumber;
+            document.getElementById('portrait-soul-desc').innerHTML = getPortraitDescription(soulNumber, 'soul');
+            
+            document.getElementById('portrait-appearance').textContent = appearanceNumber;
+            document.getElementById('portrait-appearance-desc').innerHTML = getPortraitDescription(appearanceNumber, 'appearance');
+            
+            document.getElementById('portrait-birthday').textContent = birthdayNumber;
+            document.getElementById('portrait-birthday-desc').innerHTML = getPortraitDescription(birthdayNumber, 'birthday');
+            
+            document.getElementById('portrait-karmic').textContent = karmicNumber;
+            document.getElementById('portrait-karmic-desc').innerHTML = getPortraitDescription(karmicNumber, 'karmic');
+            
+            // Общие рекомендации
+            document.getElementById('portrait-strengths').textContent = generatePortraitStrengths(lifePathNumber, destinyNumber);
+            document.getElementById('portrait-weaknesses').textContent = generatePortraitWeaknesses(lifePathNumber, karmicNumber);
+            document.getElementById('portrait-advice').textContent = generatePortraitAdvice(lifePathNumber, destinyNumber, karmicNumber);
+            
+            document.getElementById('portrait-result').style.display = 'block';
+        });
+        
+        function calculateSoulNumber(name) {
+            const letterValues = {
+                'а': 1, 'е': 6, 'ё': 7, 'и': 1, 'о': 7, 'у': 3, 'ы': 2, 'э': 4, 'ю': 5, 'я': 6
+            };
+            
+            let sum = 0;
+            const lowerName = name.toLowerCase();
+            const vowels = 'аеёиоуыэюя';
+            
+            for (let i = 0; i < lowerName.length; i++) {
+                const char = lowerName[i];
+                if (vowels.includes(char) && letterValues[char]) {
+                    sum += letterValues[char];
+                }
+            }
+            
+            return reduceNumber(sum);
+        }
+        
+        function calculateAppearanceNumber(name) {
+            const letterValues = {
+                'б': 2, 'в': 3, 'г': 4, 'д': 5, 'ж': 8, 'з': 9, 'й': 2, 'к': 3, 'л': 4, 
+                'м': 5, 'н': 6, 'п': 8, 'р': 9, 'с': 1, 'т': 2, 'ф': 4, 'х': 5, 'ц': 6, 
+                'ч': 7, 'ш': 8, 'щ': 9, 'ъ': 1, 'ь': 3
+            };
+            
+            let sum = 0;
+            const lowerName = name.toLowerCase();
+            const consonants = 'бвгджзйклмнпрстфхцчшщъь';
+            
+            for (let i = 0; i < lowerName.length; i++) {
+                const char = lowerName[i];
+                if (consonants.includes(char) && letterValues[char]) {
+                    sum += letterValues[char];
+                }
+            }
+            
+            return reduceNumber(sum);
+        }
+        
+        function generatePortraitStrengths(lifePath, destiny) {
+            const strengths = {
+                1: "Сильная воля, лидерские качества, инициативность, оригинальность мышления.",
+                2: "Дипломатичность, эмпатия, терпение, способность к сотрудничеству.",
+                3: "Творческие способности, коммуникабельность, оптимизм, артистизм.",
+                4: "Практичность, надежность, организованность, трудолюбие.",
+                5: "Адаптивность, любознательность, прогрессивность, находчивость.",
+                6: "Ответственность, заботливость, гармоничность, преданность.",
+                7: "Аналитический ум, интуиция, мудрость, духовность.",
+                8: "Организаторские способности, амбициозность, практичность, эффективность.",
+                9: "Гуманизм, сострадание, идеализм, творчество."
+            };
+            
+            return `Ваши ключевые качества: ${strengths[lifePath] || "уникальное сочетание различных талантов"} ${strengths[destiny] ? "Дополнительные сильные стороны: " + strengths[destiny] : ""}`;
+        }
+        
+        function generatePortraitWeaknesses(lifePath, karmic) {
+            const weaknesses = {
+                1: "Эгоизм, нетерпимость, импульсивность, склонность к доминированию.",
+                2: "Нерешительность, зависимость от мнения других, чрезмерная чувствительность.",
+                3: "Поверхностность, расточительность, драматизация, нетерпение.",
+                4: "Упрямство, консерватизм, излишняя практичность, сопротивление изменениям.",
+                5: "Безответственность, непоследовательность, склонность к излишествам.",
+                6: "Самопожертвование, чрезмерная опека, собственничество, критичность.",
+                7: "Цинизм, отстраненность, подозрительность, перфекционизм.",
+                8: "Материализм, властность, жесткость, трудоголизм.",
+                9: "Сентиментальность, жертвенность, непрактичность, обидчивость."
+            };
+            
+            return `Зоны развития: ${weaknesses[lifePath] || "работа над балансом различных качеств"} ${weaknesses[karmic] ? "Кармические вызовы: " + weaknesses[karmic] : ""}`;
+        }
+        
+        function generatePortraitAdvice(lifePath, destiny, karmic) {
+            const advice = {
+                1: "Развивайте терпимость к другим мнениям, учитесь сотрудничать, не подавляйте окружающих своей силой.",
+                2: "Учитесь принимать решения самостоятельно, развивайте уверенность в себе, не бойтесь конфликтов.",
+                3: "Сосредоточьтесь на глубине, а не на количестве проектов, развивайте дисциплину, избегайте поверхностности.",
+                4: "Будьте более гибкими, открывайтесь новому, не зацикливайтесь на рутине, развивайте творческое начало.",
+                5: "Учитесь завершать начатое, развивайте ответственность, найдите баланс между свободой и обязательствами.",
+                6: "Не забывайте о собственных потребностях, устанавливайте здоровые границы, избегайте гиперопеки.",
+                7: "Больше доверяйте людям, развивайте эмоциональный интеллект, не уходите в чрезмерную изоляцию.",
+                8: "Развивайте духовность, не ставьте материальные цели выше человеческих отношений, учитесь отдыхать.",
+                9: "Будьте более практичными, учитесь говорить 'нет', не позволяйте другим использовать вашу доброту."
+            };
+            
+            return `Рекомендации для гармоничной жизни: ${advice[lifePath] || "стремитесь к балансу во всех сферах жизни"} ${advice[karmic] ? "Особое внимание уделите: " + advice[karmic] : ""}`;
+        }
+        
+        // Остальные калькуляторы (матрица) остаются без изменений
         document.getElementById('calculate-matrix').addEventListener('click', function() {
             const birthDate = new Date(document.getElementById('matrix-birthdate').value);
             if (isNaN(birthDate.getTime())) {
@@ -1700,49 +1928,6 @@
             document.getElementById('matrix-weaknesses').textContent = "Склонность к перфекционизму, трудности в принятии решений.";
             document.getElementById('matrix-advice').textContent = "Развивайте эмоциональный интеллект, учитесь делегировать задачи.";
             document.getElementById('matrix-result').style.display = 'block';
-        });
-        
-        document.getElementById('calculate-portrait').addEventListener('click', function() {
-            const fullName = document.getElementById('full-name').value;
-            const birthDate = new Date(document.getElementById('portrait-birthdate').value);
-            
-            if (!fullName || isNaN(birthDate.getTime())) {
-                alert('Пожалуйста, заполните все поля');
-                return;
-            }
-            
-            // Простая реализация портрета
-            const day = birthDate.getDate();
-            const month = birthDate.getMonth() + 1;
-            const year = birthDate.getFullYear();
-            
-            const lifePathNumber = reduceNumber(reduceNumber(day) + reduceNumber(month) + reduceNumber(year));
-            const destinyNumber = calculateDestinyNumber(fullName);
-            const birthdayNumber = reduceNumber(day);
-            
-            document.getElementById('portrait-life-path').textContent = lifePathNumber;
-            document.getElementById('portrait-life-path-desc').textContent = getLifePathDescription(lifePathNumber);
-            
-            document.getElementById('portrait-destiny').textContent = destinyNumber;
-            document.getElementById('portrait-destiny-desc').textContent = "Ваше число судьбы определяет жизненное предназначение.";
-            
-            document.getElementById('portrait-soul').textContent = reduceNumber(destinyNumber + 1);
-            document.getElementById('portrait-soul-desc').textContent = "Число души отражает ваши внутренние стремления.";
-            
-            document.getElementById('portrait-appearance').textContent = reduceNumber(destinyNumber + 2);
-            document.getElementById('portrait-appearance-desc').textContent = "Число внешнего облика показывает, как вас воспринимают другие.";
-            
-            document.getElementById('portrait-birthday').textContent = birthdayNumber;
-            document.getElementById('portrait-birthday-desc').textContent = "Число дня рождения раскрывает ваши врожденные таланты.";
-            
-            document.getElementById('portrait-karmic').textContent = reduceNumber(day + month);
-            document.getElementById('portrait-karmic-desc').textContent = "Кармическое число указывает на уроки, которые вам предстоит освоить.";
-            
-            document.getElementById('portrait-strengths').textContent = "Вы обладаете редким сочетанием аналитического ума и творческих способностей.";
-            document.getElementById('portrait-weaknesses').textContent = "Иногда вы можете быть излишне критичны к себе и окружающим.";
-            document.getElementById('portrait-advice').textContent = "Развивайте навыки быстрого принятия решений и учитесь доверять своей интуиции.";
-            
-            document.getElementById('portrait-result').style.display = 'block';
         });
     </script>
 </body>
