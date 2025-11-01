@@ -594,7 +594,7 @@
                 <nav>
                     <ul>
                         <li><a href="#home">Главная</a></li>
-                        <li><a href="#about">О нумерологии</a></li>
+                        <li><a href="#about">Про нумерологию</a></li>
                         <li><a href="#calculators">Калькуляторы</a></li>
                         <li><a href="#compatibility">Совместимость</a></li>
                         <li><a href="#blog">Блог</a></li>
