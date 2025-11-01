@@ -1,1 +1,676 @@
-<html lang="ru"> <head> <meta charset="utf-8" /> <meta name="viewport" content="width=device-width, initial-scale=1" /> <title>Космос Чисел | NumerologyLab</title> <meta name="description" content="Интуитивно понятный современный сайт нумерологии: персонализированные инструменты для самопознания и планирования жизни." /> <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"> <style> :root{ --bg: #0b1020; --card: #141a34; --muted: #9aa4b2; --primary: #7bd2ff; --accent: #8a7dff; --text: #e8eaf6; --radius: 14px; } *{box-sizing:border-box} html,body{margin:0;padding:0;background: radial-gradient(circle at 20% -10%, rgba(123,210,255,.15), transparent 40%), radial-gradient(circle at 90% 0%, rgba(138,125,255,.15), transparent 40%), var(--bg); color: var(--text);font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto; min-height:100%; } header{position:sticky; top:0; z-index:10; background: rgba(10,12,28,.95); border-bottom:1px solid rgba(255,255,255,.06); backdrop-filter: blur(6px);} .container{max-width:1100px; margin:0 auto; padding: 0 20px;} .brand{display:flex; align-items:center; gap:12px; padding:16px 0} .brand__logo{width:40px; height:40px; border-radius:50%; background: conic-gradient(from 180deg at 50% 50%, #4ecdc4, #7bd2ff, #8a7dff, #4ecdc4); display:flex; align-items:center; justify-content:center; font-weight:700} .brand__name{font-weight:700; font-size:1.1rem} nav ul{list-style:none; display:flex; gap:14px; padding:0; margin:0} nav a{color:var(--text); text-decoration:none; padding:10px 12px; display:inline-block; border-radius:8px} nav a:hover{background: rgba(255,255,255,.08)} main{padding:28px 0 60px} .hero{display:grid; grid-template-columns:1.1fr .9fr; gap:28px; align-items:center; padding:40px 0} .hero__title{font-size:2.2rem; line-height:1.1; margin:0 0 12px} .hero__subtitle{color:var(--muted); font-size:1.05rem; margin-bottom:20px} .cta{display:inline-block; padding:14px 22px; background:linear-gradient(135deg, #7bd2ff 0%, #8a7dff 100%); color:#041226; border-radius:999px; font-weight:700; text-decoration:none} .grid{display:grid; grid-template-columns: repeat(2, 1fr); gap:16px} .card{background: rgba(20,26,52,.95); border:1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding:18px; box-shadow: 0 6px 20px rgba(0,0,0,.25)} .card h3{margin:0 0 8px; font-size:1.05rem} .card p{margin:0; color:var(--muted); font-size:.95rem} section{margin-top:40px} h2.section-title{font-size:1.6rem; margin-bottom:14px} form{display:flex; flex-direction:column; gap:10px} label{font-weight:600} input, select, textarea{padding:10px 12px; border-radius:8px; border:1px solid rgba(255,255,255,.15); background:#0f1630; color:#eaf0ff} input::placeholder, textarea::placeholder{color:#aab4d4} .row{display:flex; gap:12px} .badge{display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background: rgba(123,210,255,.15); color:#e7f7ff; font-size:.85rem} footer{margin-top:40px; padding:20px 0; text-align:center; color: var(--muted); border-top:1px solid rgba(255,255,255,.08)} @media (max-width: 900px){ .hero{grid-template-columns:1fr; padding:20px} .grid{grid-template-columns:1fr} } </style> </head> <body> <header> <div class="container brand" aria-label="Главная навигация"> <div class="brand__logo" aria-label="Логотип">Ν</div> <div class="brand__name">Космос Чисел — NumerologyLab</div> <nav style="margin-left:auto" aria-label="Основная навигация"> <ul> <li><a href="#home">Главная</a></li> <li><a href="#about">О нумерологии</a></li> <li><a href="#calculators">Калькуляторы</a></li> <li><a href="#compatibility">Совместимость</a></li> <li><a href="#dates">Значимые даты</a></li> <li><a href="#fio">ФИО</a></li> <li><a href="#profile">Личный кабинет</a></li> <li><a href="#blog">Блог</a></li> <li><a href="#contacts">Контакты</a></li> </ul> </nav> </div> </header> <main class="container" id="home"> <section class="hero" aria-label="Приветствие и призыв к действию"> <div> <h1 class="hero__title">Космос Чисел</h1> <p class="hero__subtitle">Интуитивно понятные инструменты нумерологии для самопознания и планирования жизни. Персонализированные трактовки и глубокие инсайты — быстро и просто.</p> <a href="#calculators" class="cta" aria-label="Перейти к калькуляторам">Рассчитайте свое Число Жизненного Пути</a> <div style="margin-top:14px" class="badge" aria-label="Ключевые преимущества"> <span>Персонализация</span><span>•</span><span>Глубина трактовок</span><span>•</span><span>Совместимость</span> </div> </div> <div class="card" aria-label="Краткие преимущества"> <h3 style="margin:0 0 8px">Что вы получите</h3> <p>Простые инструменты для расчета и трактовки чисел: Жизненного Пути, Судьбы, Души и т.д. Подробные разборы и рекомендации по планированию на месяц и год.</p> </div> </section> <section id="calculators" aria-label="Калькуляторы"> <h2 class="section-title">Калькуляторы</h2> <div class="grid" aria-label="Основные калькуляторы"> <div class="card"> <h3>1. Число Жизненного Пути</h3> <p>Расчёт по дате рождения. Базовый инструмент для понимания предназначения и жизненного пути.</p> <form onsubmit="event.preventDefault(); calculateLifePath()" aria-label="Калькулятор жизни"> <div class="row"> <input type="date" id="lp_date" required aria-label="Дата рождения"> </div> <button type="submit" class="cta" style="width:max-content" aria-label="Рассчитать Число Жизненного Пути">Рассчитать</button> <div id="lp_result" class="badge" style="display:none" aria-live="polite"></div> </form> </div> <div class="card"> <h3>2. Число Судьбы (Экспрессии)</h3> <p>По ФИО. Быстрый расчёт смысловых энергий вашего имени и фамилии.</p> <form onsubmit="event.preventDefault(); calculateLifeExpression()" aria-label="Экспрессия ФИО"> <div class="row"> <input type="text" id="le_fullname" placeholder="Полное имя и фамилия" required aria-label="Полное имя и фамилия"> </div> <button type="submit" class="cta" style="width:max-content" aria-label="Рассчитать Число Судьбы">Рассчитать</button> <div id="le_result" class="badge" style="display:none" aria-live="polite"></div> </form> </div> <div class="card"> <h3>3. Число Души</h3> <p>По гласным в имени. Вдохновение и внутренний мир.</p> <form onsubmit="event.preventDefault(); calculateSoulName()" aria-label="Число Души"> <div class="row"> <input type="text" id="soul_name" placeholder="Имя и фамилия" required aria-label="Имя и фамилия для Души"> </div> <button type="submit" class="cta" style="width:max-content" aria-label="Рассчитать Число Души">Рассчитать</button> <div id="soul_result" class="badge" style="display:none" aria-live="polite"></div> </form> </div> <div class="card"> <h3>4. Число Внешнего Облика</h3> <p>По согласным в имени. Внешняя энергия и образ.</p> <form onsubmit="event.preventDefault(); calculateOuterAppearance()" aria-label="Число внешнего облика"> <div class="row"> <input type="text" id="outer_name" placeholder="Имя и фамилия" required aria-label="Имя и фамилия для внешности"> </div> <button type="submit" class="cta" style="width:max-content" aria-label="Рассчитать Число Внешнего Облика">Рассчитать</button> <div id="outer_result" class="badge" style="display:none" aria-live="polite"></div> </form> </div> </div> </section> <section id="compatibility" aria-label="Совместимость"> <h2 class="section-title">Совместимость</h2> <div class="grid" aria-label="Калькуляторы совместимости"> <div class="card"> <h3>2.1 Совместимость партнеров</h3> <p>Расчет по двум датам рождения и/или именам.</p> <form onsubmit="event.preventDefault(); calculateCompatibility()" aria-label="Совместимость партнеров"> <div class="row"> <input type="date" id="cp_date1" required placeholder="Дата рождения партнера 1" aria-label="Дата рождения 1"> <input type="date" id="cp_date2" required placeholder="Дата рождения партнера 2" aria-label="Дата рождения 2"> </div> <button type="submit" class="cta" style="width:max-content" aria-label="Рассчитать Совместимость">Рассчитать</button> <div id="cp_result" class="badge" style="display:none" aria-live="polite"></div> </form> </div> <div class="card"> <h3>2.2 Совместимость с друзьями/коллегами</h3> <p>Базовый анализ по именам или датам.</p> <form onsubmit="event.preventDefault(); calculateFriendship()" aria-label="Совместимость друзей"> <div class="row"> <input type="text" id="cf_name1" placeholder="Имя 1" required aria-label="Имя 1"> <input type="text" id="cf_name2" placeholder="Имя 2" required aria-label="Имя 2"> </div> <button type="submit" class="cta" style="width:max-content" aria-label="Рассчитать Совместимость друзей">Рассчитать</button> <div id="cf_result" class="badge" style="display:none" aria-live="polite"></div> </form> </div> </div> </section> <section id="dates" aria-label="Анализ значимых дат"> <h2 class="section-title">Анализ значимых дат</h2> <div class="grid" aria-label="Разделы анализа дат"> <div class="card"> <h3>3.1 Нумерология свадьбы</h3> <p>Расчет благоприятной даты и анализ выбранной даты.</p> </div> <div class="card"> <h3>3.2 Нумерология бизнеса</h3> <p>Дата регистрации, названия бренда — влияние чисел на бизнес.</p> </div> </div> </section> <section id="fio" aria-label="Расшифровка ФИО"> <h2 class="section-title">4. Расшифровка ФИО (полная)</h2> <div class="grid" aria-label="Раздел расшифровки ФИО"> <div class="card"> <h3>4.1 Подробный разбор по каждой букве</h3> <p>Анализ по буквам и их числовая привязка.</p> </div> <div class="card"> <h3>4.2 Расчет Числа Судьбы, Души, Облика</h3> <p>Интегрированная трактовка имени и судьбы.</p> </div> <div class="card"> <h3>4.3 Рекомендации по смене имени</h3> <p>Возможные шаги и взгляды на оптимизацию чисел.</p> </div> </div> </section> <section id="profile" aria-label="Личный кабинет"> <h2 class="section-title">5. Личный Кабинет</h2> <div class="grid" aria-label="Клиентский кабинет"> <div class="card"> <h3>5.1 Сохранение расчетов</h3> <p>Создание персонального пространства для ваших чисел.</p> </div> <div class="card"> <h3>5.2 Нумерологический паспорт</h3> <p>Сводка всех основных чисел по человеку.</p> </div> <div class="card"> <h3>5.3 Календарь личных чисел</h3> <p>Планирование на месяц по числам.</p> </div> </div> </section> <section id="blog" aria-label="Блог"> <h2 class="section-title">6. Блог / Статьи</h2> <p>Глубокие статьи о значениях чисел, мастер-числах, циклах жизни и кармических долгах.</p> </section> <section id="contacts" aria-label="Контакты"> <h2 class="section-title">7. Контакты / Обратная связь</h2> <p>Свяжитесь с нами для персонального числового анализа по дате рождения.</p> <form aria-label="Связаться по контактам" onsubmit="event.preventDefault(); submitContact()"> <div class="row"> <input type="text" id="contact_name" placeholder="Ваше имя" required aria-label="Имя"> <input type="email" id="contact_email" placeholder="Электронная почта" required aria-label="Электронная почта"> </div> <textarea id="contact_message" placeholder="Сообщение" rows="4" required aria-label="Сообщение"></textarea> <button type="submit" class="cta" style="width:max-content" aria-label="Отправить сообщение">Отправить</button> <div id="contact_status" class="badge" style="display:none" aria-live="polite"></div> </form> </section> </main> <footer> <div class="container"> © 2025 NumerologyLab. Все числа — вселенной, наши трактовки — вашей дорогой к самопознанию. </div> </footer> <script> // Примитивные заглушки для расчётов (поменяйте на реальную логику) function showResult(el, text){ el.textContent = text; el.style.display = 'inline-flex'; } function calculateLifePath(){ const d = document.getElementById('lp_date').value; if(!d){ return; } // Простая примерная формула: сумма цифр даты и месяца, года const parts = d.split('-'); const sum = parts.map(p => p.split('').reduce((a,c)=>a+parseInt(c||0,10)||0,0)).reduce((a,b)=>a+b,0); const lifePath = (sum % 9) || 9; const el = document.getElementById('lp_result'); showResult(el, 'Ваше Число Жизненного Пути: ' + lifePath); } function calculateLifeExpression(){ const name = document.getElementById('le_fullname').value.trim(); const letters = name.replace(/[^A-Za-zА-Яа-я]/g,'').toUpperCase(); let sum = 0; for(let ch of letters){ sum += ch.charCodeAt(0) - 64; // А=1 ... } const expr = (sum % 9) || 9; const el = document.getElementById('le_result'); showResult(el, 'Число Судьбы (Экспрессии): ' + expr); } function calculateSoulName(){ const name = document.getElementById('soul_name').value; const v = (name.match(/[АЕЁИОУЫЭЮЯаеёиоуыэюяaeiou]/gi) || []).length; const el = document.getElementById('soul_result'); showResult(el, 'Число Души: ' + Math.max(1, v) ); } function calculateOuterAppearance(){ const name = document.getElementById('outer_name').value; const v = (name.match(/[BCDFGHJKLMNPQRSTVWXYZbcdfghjklmnpqrstvwxyz]/g) || []).length; const el = document.getElementById('outer_result'); showResult(el, 'Число Внешнего Облика: ' + Math.max(1, v)); } function calculateCompatibility(){ const d1 = document.getElementById('cp_date1').value; const d2 = document.getElementById('cp_date2').value; if(!d1 || !d2){ return; } // Простая проверка: разница дней между двумя датами const day1 = new Date(d1).getTime(); const day2 = new Date(d2).getTime(); const diff = Math.abs(day2 - day1); const score = Math.max(1, Math.min(99, Math.floor((1 - diff/31536000000) * 50 + 50))); const el = document.getElementById('cp_result'); showResult(el, 'Совместимость: примерно ' + score + '%'); } function calculateFriendship(){ const a = document.getElementById('cf_name1').value; const b = document.getElementById('cf_name2').value; if(!a || !b){ return; } const both = (a + b).toUpperCase(); const sum = both.split('').reduce((acc,c)=> acc + (c.charCodeAt(0)-64 || 0),0); const score = Math.abs((sum % 97)) + 3; const el = document.getElementById('cf_result'); showResult(el, 'Совместимость друзей: ' + score + '%'); } function submitContact(){ const name = document.getElementById('contact_name').value; const email = document.getElementById('contact_email').value; const msg = document.getElementById('contact_message').value; if(!name || !email || !msg){ return; } const el = document.getElementById('contact_status'); el.style.display = 'inline-flex'; el.textContent = 'Сообщение отправлено. Мы ответим на вашу почту: ' + email; // Очистка полей можно добавить } // Простая быстрый переход по якорям (для плавного эффекта) document.querySelectorAll('a[href^="#"]').forEach(a => { a.addEventListener('click', function(e){ const id = this.getAttribute('href').slice(1); const el = document.getElementById(id); if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); } }); }); </script> </body> </html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Космос Чисел - NumerologyLab</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #9b59b6;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+        }
+        
+        nav ul li a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: #8e44ad;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-title p {
+            color: #7f8c8d;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        /* Calculators Section */
+        .calculators {
+            padding: 5rem 0;
+            background-color: #f8f9fa;
+        }
+        
+        .calculator-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .calculator-tab {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            font-weight: 500;
+        }
+        
+        .calculator-tab.active {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .calculator-content {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .calculator-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .calculator-result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .calculator-result h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        /* Blog Section */
+        .blog {
+            padding: 5rem 0;
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .blog-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .blog-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .blog-card-content {
+            padding: 1.5rem;
+        }
+        
+        .blog-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .blog-card p {
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-card a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+            
+            nav {
+                display: none;
+                width: 100%;
+                margin-top: 1rem;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">🔢</span>
+                    <h1>Космос Чисел</h1>
+                </div>
+                <button class="mobile-menu-btn">☰</button>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#about">О нумерологии</a></li>
+                        <li><a href="#calculators">Калькуляторы</a></li>
+                        <li><a href="#compatibility">Совместимость</a></li>
+                        <li><a href="#blog">Блог</a></li>
+                        <li><a href="#contacts">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>Раскройте тайны вашей судьбы с помощью чисел</h2>
+            <p>NumerologyLab превращает сложные нумерологические расчеты в простые инструменты для самопознания и планирования жизни</p>
+            <a href="#calculators" class="btn">Рассчитайте свое Число Жизненного Пути</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наши возможности</h2>
+                <p>Откройте для себя полный спектр нумерологических инструментов для самопознания</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🌌</div>
+                    <h3>Число Жизненного Пути</h3>
+                    <p>Узнайте свое основное число, которое определяет ваш жизненный путь и предназначение</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💫</div>
+                    <h3>Совместимость</h3>
+                    <p>Проанализируйте совместимость с партнером, друзьями или коллегами по числам</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3>Планирование</h3>
+                    <p>Определите благоприятные дни для важных событий с помощью нумерологии</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Матрица Судьбы</h3>
+                    <p>Получите полный нумерологический портрет с помощью современной матрицы</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculators Section -->
+    <section class="calculators" id="calculators">
+        <div class="container">
+            <div class="section-title">
+                <h2>Нумерологические калькуляторы</h2>
+                <p>Выберите нужный калькулятор и получите персональную расшифровку</p>
+            </div>
+            <div class="calculator-tabs">
+                <div class="calculator-tab active" data-tab="life-path">Число Жизненного Пути</div>
+                <div class="calculator-tab" data-tab="destiny">Число Судьбы</div>
+                <div class="calculator-tab" data-tab="soul">Число Души</div>
+                <div class="calculator-tab" data-tab="appearance">Число Внешнего Облика</div>
+            </div>
+            <div class="calculator-content">
+                <div class="calculator-form" id="life-path-form">
+                    <h3>Расчет Числа Жизненного Пути</h3>
+                    <p>Введите вашу дату рождения, чтобы узнать основное число вашей жизни</p>
+                    <div class="form-group">
+                        <label for="birth-date">Дата рождения</label>
+                        <input type="date" id="birth-date" required>
+                    </div>
+                    <button class="btn" id="calculate-life-path">Рассчитать</button>
+                    <div class="calculator-result" id="life-path-result">
+                        <h3>Ваше Число Жизненного Пути: <span id="life-path-number"></span></h3>
+                        <p id="life-path-description"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog" id="blog">
+        <div class="container">
+            <div class="section-title">
+                <h2>Полезные статьи о нумерологии</h2>
+                <p>Углубите свои знания с помощью наших экспертных материалов</p>
+            </div>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Мастер-числа">
+                    <div class="blog-card-content">
+                        <h3>Мастер-числа 11, 22, 33: сила и ответственность</h3>
+                        <p>Узнайте о особых вибрациях мастер-чисел и их влиянии на вашу жизнь</p>
+                        <a href="#">Читать далее →</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1553406830-ef2513450d76?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Кармические числа">
+                    <div class="blog-card-content">
+                        <h3>Кармические числа: уроки прошлых жизней</h3>
+                        <p>Как распознать и работать с кармическими числами 13, 14, 16 и 19</p>
+                        <a href="#">Читать далее →</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Личный год">
+                    <div class="blog-card-content">
+                        <h3>Личный год: как планировать жизнь по циклам</h3>
+                        <p>Определите свой текущий личный год и используйте его энергию для достижения целей</p>
+                        <a href="#">Читать далее →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contacts">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Космос Чисел</h3>
+                    <p>NumerologyLab - ваш проводник в мире нумерологии. Мы превращаем сложные расчеты в простые инструменты для самопознания.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Калькуляторы</h3>
+                    <ul>
+                        <li><a href="#">Число Жизненного Пути</a></li>
+                        <li><a href="#">Число Судьбы</a></li>
+                        <li><a href="#">Число Души</a></li>
+                        <li><a href="#">Совместимость</a></li>
+                        <li><a href="#">Матрица Судьбы</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Ресурсы</h3>
+                    <ul>
+                        <li><a href="#">Блог</a></li>
+                        <li><a href="#">О нумерологии</a></li>
+                        <li><a href="#">Словарь терминов</a></li>
+                        <li><a href="#">Частые вопросы</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li>Email: info@numerologylab.ru</li>
+                        <li>Телефон: +7 (999) 123-45-67</li>
+                        <li>Социальные сети:</li>
+                        <li>
+                            <a href="#">VK</a> | 
+                            <a href="#">Telegram</a> | 
+                            <a href="#">YouTube</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 NumerologyLab "Космос Чисел". Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Мобильное меню
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+        
+        // Табы калькуляторов
+        const tabs = document.querySelectorAll('.calculator-tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                tabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                // Здесь должна быть логика смены форм калькуляторов
+            });
+        });
+        
+        // Расчет числа жизненного пути
+        document.getElementById('calculate-life-path').addEventListener('click', function() {
+            const birthDate = new Date(document.getElementById('birth-date').value);
+            if (isNaN(birthDate.getTime())) {
+                alert('Пожалуйста, введите корректную дату рождения');
+                return;
+            }
+            
+            const day = birthDate.getDate();
+            const month = birthDate.getMonth() + 1;
+            const year = birthDate.getFullYear();
+            
+            // Простой расчет числа жизненного пути
+            let lifePathNumber = reduceNumber(day) + reduceNumber(month) + reduceNumber(year);
+            lifePathNumber = reduceNumber(lifePathNumber);
+            
+            document.getElementById('life-path-number').textContent = lifePathNumber;
+            document.getElementById('life-path-description').textContent = getLifePathDescription(lifePathNumber);
+            document.getElementById('life-path-result').style.display = 'block';
+        });
+        
+        function reduceNumber(num) {
+            while (num > 9 && num !== 11 && num !== 22 && num !== 33) {
+                let sum = 0;
+                while (num > 0) {
+                    sum += num % 10;
+                    num = Math.floor(num / 10);
+                }
+                num = sum;
+            }
+            return num;
+        }
+        
+        function getLifePathDescription(number) {
+            const descriptions = {
+                1: "Вы - прирожденный лидер, независимый и амбициозный. Ваша сила в инициативе и способности начинать новые дела.",
+                2: "Вы - дипломат и миротворец, чувствительный и интуитивный. Ваша сила в сотрудничестве и создании гармонии.",
+                3: "Вы - творческая личность, выразительный и оптимистичный. Ваша сила в самовыражении и коммуникации.",
+                4: "Вы - практичный строитель, надежный и трудолюбивый. Ваша сила в стабильности и создании прочного фундамента.",
+                5: "Вы - искатель свободы, адаптивный и любознательный. Ваша сила в изменениях и разнообразии опыта.",
+                6: "Вы - воспитатель, ответственный и заботливый. Ваша сила в служении и создании гармонии в отношениях.",
+                7: "Вы - мыслитель, аналитичный и духовный. Ваша сила в поиске истины и внутренней мудрости.",
+                8: "Вы - организатор, амбициозный и эффективный. Ваша сила в достижении материального успеха и власти.",
+                9: "Вы - гуманист, сострадательный и идеалистичный. Ваша сила в завершении циклов и служении человечеству.",
+                11: "Вы - просветленный, интуитивный и вдохновляющий. Ваша сила в духовном озарении и служении высшим идеалам.",
+                22: "Вы - мастер-строитель, практичный мечтатель. Ваша сила в реализации грандиозных планов на благо человечества.",
+                33: "Вы - мастер-учитель, сострадательный и вдохновляющий. Ваша сила в служении через любовь и исцеление."
+            };
+            
+            return descriptions[number] || "Описание для этого числа пока недоступно.";
+        }
+    </script>
+</body>
+</html>
