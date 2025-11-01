@@ -705,6 +705,28 @@
     </style>
 </head>
 <body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">🔢</span>
+                    <h1>Космос Чисел</h1>
+                </div>
+                <button class="mobile-menu-btn">☰</button>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#about">О нумерологии</a></li>
+                        <li><a href="#calculators">Калькуляторы</a></li>
+                        <li><a href="#compatibility">Совместимость</a></li>
+                        <li><a href="#blog">Блог</a></li>
+                        <li><a href="#contacts">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
