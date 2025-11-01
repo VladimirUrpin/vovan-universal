@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -5,6 +6,7 @@
     <title>Космос Чисел - NumerologyLab</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Стили остаются без изменений */
         :root {
             --primary: #2c3e50;
             --secondary: #3498db;
@@ -385,52 +387,6 @@
             margin: 0.5rem 0;
         }
         
-        /* Стили для выбора метода расчета совместимости */
-        .method-selector {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .method-option {
-            flex: 1;
-            min-width: 150px;
-            text-align: center;
-            padding: 1rem;
-            background: #f8f9fa;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .method-option.active {
-            background: var(--secondary);
-            color: white;
-            border-color: var(--secondary);
-        }
-        
-        .method-option:hover {
-            border-color: var(--secondary);
-        }
-        
-        .method-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        /* Адаптивные стили для выбора метода */
-        @media (max-width: 576px) {
-            .method-selector {
-                flex-direction: column;
-            }
-            
-            .method-option {
-                min-width: 100%;
-            }
-        }
-        
         /* Blog Section */
         .blog {
             padding: 5rem 0;
@@ -756,31 +712,14 @@
                 <!-- Совместимость -->
                 <div class="calculator-form" id="compatibility-form" style="display: none;">
                     <h3>Расчет совместимости по числам судьбы</h3>
-                    <p>Выберите метод расчета и введите данные двух людей для анализа их совместимости</p>
+                    <p>Введите данные двух людей для анализа их совместимости по датам рождения и именам</p>
                     
-                    <!-- Выбор метода расчета -->
-                    <div class="method-selector">
-                        <div class="method-option active" data-method="names">
-                            <div class="method-icon"><i class="fas fa-user-friends"></i></div>
-                            <div>По именам</div>
-                        </div>
-                        <div class="method-option" data-method="birthdates">
-                            <div class="method-icon"><i class="fas fa-birthday-cake"></i></div>
-                            <div>По датам рождения</div>
-                        </div>
-                        <div class="method-option" data-method="combined">
-                            <div class="method-icon"><i class="fas fa-random"></i></div>
-                            <div>Комбинированный</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Форма для ввода данных -->
                     <div class="form-group">
                         <label for="person1-name">Имя первого человека</label>
                         <input type="text" id="person1-name" placeholder="Введите полное имя">
                     </div>
                     
-                    <div class="form-group" id="person1-birthdate-group">
+                    <div class="form-group">
                         <label for="person1-birthdate">Дата рождения первого человека</label>
                         <input type="date" id="person1-birthdate">
                     </div>
@@ -790,7 +729,7 @@
                         <input type="text" id="person2-name" placeholder="Введите полное имя">
                     </div>
                     
-                    <div class="form-group" id="person2-birthdate-group">
+                    <div class="form-group">
                         <label for="person2-birthdate">Дата рождения второго человека</label>
                         <input type="date" id="person2-birthdate">
                     </div>
@@ -1115,50 +1054,6 @@
             });
         });
         
-        // Выбор метода расчета совместимости
-        let currentMethod = 'names';
-        const methodOptions = document.querySelectorAll('.method-option');
-        
-        methodOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                // Убрать активный класс у всех опций
-                methodOptions.forEach(opt => opt.classList.remove('active'));
-                // Добавить активный класс к выбранной опции
-                this.classList.add('active');
-                // Сохранить выбранный метод
-                currentMethod = this.getAttribute('data-method');
-                
-                // Показать/скрыть поля ввода в зависимости от выбранного метода
-                updateFormVisibility();
-            });
-        });
-        
-        function updateFormVisibility() {
-            const nameFields = document.querySelectorAll('input[type="text"]');
-            const dateFields = [
-                document.getElementById('person1-birthdate-group'),
-                document.getElementById('person2-birthdate-group')
-            ];
-            
-            switch(currentMethod) {
-                case 'names':
-                    nameFields.forEach(field => field.style.display = 'block');
-                    dateFields.forEach(field => field.style.display = 'none');
-                    break;
-                case 'birthdates':
-                    nameFields.forEach(field => field.style.display = 'none');
-                    dateFields.forEach(field => field.style.display = 'block');
-                    break;
-                case 'combined':
-                    nameFields.forEach(field => field.style.display = 'block');
-                    dateFields.forEach(field => field.style.display = 'block');
-                    break;
-            }
-        }
-        
-        // Инициализация видимости полей при загрузке
-        updateFormVisibility();
-        
         // Расчет числа жизненного пути
         document.getElementById('calculate-life-path').addEventListener('click', function() {
             const birthDate = new Date(document.getElementById('birth-date').value);
@@ -1183,42 +1078,24 @@
             document.getElementById('life-path-result').style.display = 'block';
         });
         
-        // Расчет совместимости - ПЕРЕПИСАННАЯ ФУНКЦИЯ
+        // Расчет совместимости - ИСПРАВЛЕННАЯ ФУНКЦИЯ
         document.getElementById('calculate-compatibility').addEventListener('click', function() {
             const person1Name = document.getElementById('person1-name').value;
             const person1Birthdate = new Date(document.getElementById('person1-birthdate').value);
             const person2Name = document.getElementById('person2-name').value;
             const person2Birthdate = new Date(document.getElementById('person2-birthdate').value);
             
-            // Проверка введенных данных в зависимости от выбранного метода
-            let isValid = false;
-            
-            switch(currentMethod) {
-                case 'names':
-                    isValid = person1Name && person1Name.trim() !== '' && 
-                             person2Name && person2Name.trim() !== '';
-                    break;
-                case 'birthdates':
-                    isValid = !isNaN(person1Birthdate.getTime()) && 
-                             !isNaN(person2Birthdate.getTime());
-                    break;
-                case 'combined':
-                    isValid = (person1Name && person1Name.trim() !== '' || !isNaN(person1Birthdate.getTime())) && 
-                             (person2Name && person2Name.trim() !== '' || !isNaN(person2Birthdate.getTime()));
-                    break;
-            }
-            
-            if (!isValid) {
-                alert('Пожалуйста, заполните необходимые поля в соответствии с выбранным методом расчета');
+            if ((!person1Name && isNaN(person1Birthdate.getTime())) || (!person2Name && isNaN(person2Birthdate.getTime()))) {
+                alert('Пожалуйста, заполните хотя бы имена или даты рождения для обоих людей');
                 return;
             }
             
             // Расчет чисел для обоих людей
-            const person1Numbers = calculatePersonNumbers(person1Name, person1Birthdate, currentMethod);
-            const person2Numbers = calculatePersonNumbers(person2Name, person2Birthdate, currentMethod);
+            const person1Numbers = calculatePersonNumbers(person1Name, person1Birthdate);
+            const person2Numbers = calculatePersonNumbers(person2Name, person2Birthdate);
             
             // Расчет совместимости
-            const compatibility = calculateCompatibility(person1Numbers, person2Numbers, currentMethod);
+            const compatibility = calculateCompatibility(person1Numbers, person2Numbers);
             
             document.getElementById('compatibility-percentage').textContent = `${compatibility.percentage}%`;
             document.getElementById('compatibility-fill').style.width = `${compatibility.percentage}%`;
@@ -1314,37 +1191,101 @@
             return num;
         }
         
-        // ПЕРЕПИСАННАЯ ФУНКЦИЯ РАСЧЕТА ЧИСЕЛ ЧЕЛОВЕКА
-        function calculatePersonNumbers(name, birthDate, method) {
+        function getLifePathDescription(number) {
+            const descriptions = {
+                1: "Вы - прирожденный лидер, независимый и амбициозный. Ваше предназначение - вести других, проявлять инициативу и создавать новое. Вы обладаете сильной волей и оригинальным мышлением, способны вдохновлять людей на свершения. Ваша энергия направлена на достижение целей и преобразование окружающего мира.",
+                2: "Вы - дипломат и миротворец, чувствительный и интуитивный. Ваша роль - создавать гармонию, сотрудничать и поддерживать баланс в отношениях. Вы умеете слышать других и находить компромиссы. Ваша сила в способности объединять людей и создавать прочные связи, основанные на взаимном уважении и понимании.",
+                3: "Вы - творческая личность, выразительный и оптимистичный. Ваше призвание - вдохновлять других, выражать красоту и радость через искусство, общение и самовыражение. Вы обладаете даром слова и художественным восприятием мира. Ваша энергия привлекает людей и создает атмосферу праздника.",
+                4: "Вы - практичный строитель, надежный и трудолюбивый. Ваша миссия - создавать прочный фундамент, систематизировать и организовывать. Вы цените стабильность и практичность. Ваша сила в умении превращать идеи в реальные проекты и доводить начатое до конца.",
+                5: "Вы - искатель свободы, адаптивный и любознательный. Ваш путь - исследовать мир, наслаждаться разнообразием и передавать свой опыт другим. Вы ненавидите рутину и ограничения. Ваша энергия направлена на поиск новых возможностей и расширение горизонтов.",
+                6: "Вы - воспитатель, ответственный и заботливый. Ваше предназначение - служить семье и обществу, создавать уют и гармонию в отношениях. Вы природный целитель и советчик. Ваша сила в способности создавать безопасное пространство для роста и развития близких.",
+                7: "Вы - мыслитель, аналитичный и духовный. Ваша задача - искать истину, развивать интуицию и делиться мудростью. Вы стремитесь к глубине понимания мира и себя. Ваша энергия направлена на исследование тайн бытия и поиск ответов на фундаментальные вопросы.",
+                8: "Вы - организатор, амбициозный и эффективный. Ваша миссия - достигать материального успеха, управлять ресурсами и воплощать идеи в реальность. Вы обладаете деловой хваткой. Ваша сила в умении видеть возможности для роста и превращать их в конкретные результаты.",
+                9: "Вы - гуманист, сострадательный и идеалистичный. Ваше предназначение - служить человечеству, завершать циклы и нести любовь. Вы стремитесь к всеобщему благу. Ваша энергия направлена на помощь другим и создание более справедливого мира.",
+                11: "Вы - просветленный, интуитивный и вдохновляющий. Ваша миссия - нести духовное озарение, вдохновлять других и служить высшим идеалам. Вы - мост между материальным и духовным. Ваша сила в способности видеть глубинные связи и передавать высшие истины.",
+                22: "Вы - мастер-строитель, практичный мечтатель. Ваша задача - реализовывать грандиозные планы на благо человечества, сочетая духовное видение с практической реализацией. Вы способны превращать утопические идеи в работающие системы.",
+                33: "Вы - мастер-учитель, сострадательный и вдохновляющий. Ваше предназначение - служить через любовь, исцелять и возвышать человеческое сознание. Вы - пример безусловной любви. Ваша сила в способности трансформировать боль в мудрость."
+            };
+            
+            return descriptions[number] || "Описание для этого числа пока недоступно.";
+        }
+        
+        function getLifePathStrengths(number) {
+            const strengths = {
+                1: "Лидерские качества, независимость, инициативность, оригинальность, решительность, амбициозность, смелость, новаторство, уверенность в себе, способность начинать новые проекты.",
+                2: "Дипломатичность, чувствительность, интуиция, сотрудничество, терпение, тактичность, адаптивность, способность к компромиссу, эмпатия, умение слушать.",
+                3: "Креативность, оптимизм, коммуникабельность, артистизм, чувство юмора, энтузиазм, обаяние, выразительность, многогранность, вдохновенность.",
+                4: "Надежность, практичность, трудолюбие, организованность, дисциплина, стабильность, терпение, методичность, основательность, честность.",
+                5: "Адаптивность, любознательность, прогрессивность, многосторонность, свобода, находчивость, общительность, предприимчивость, гибкость, жажда приключений.",
+                6: "Ответственность, заботливость, гармоничность, служение, сострадание, надежность, художественный вкус, способность создавать уют, преданность, гуманизм.",
+                7: "Аналитический ум, интуиция, мудрость, духовность, перфекционизм, проницательность, наблюдательность, глубина, самодостаточность, поиск истины.",
+                8: "Организаторские способности, амбициозность, практичность, эффективность, сила воли, решимость, деловая хватка, управленческие навыки, материальная успешность.",
+                9: "Гуманизм, сострадание, идеализм, терпимость, творчество, щедрость, мудрость, всепрощение, художественные способности, филантропия.",
+                11: "Интуиция, вдохновение, идеализм, визионерство, чувствительность, духовность, просветленность, идеализм, способность к трансформации, мечтательность.",
+                22: "Практическая мудрость, глобальное мышление, строительство, организация, мечтательность, реализация, управление масштабными проектами, преобразование идей в реальность.",
+                33: "Безусловная любовь, сострадание, исцеление, вдохновение, учительство, самопожертвование, духовное руководство, способность возвышать других, трансцендентность."
+            };
+            
+            return strengths[number] || "Сильные стороны для этого числа пока не определены.";
+        }
+        
+        function getLifePathWeaknesses(number) {
+            const weaknesses = {
+                1: "Эгоизм, агрессивность, нетерпимость, доминирование, импульсивность, упрямство, склонность к манипуляции, нетерпеливость, чрезмерная независимость, склонность к риску.",
+                2: "Чрезмерная чувствительность, нерешительность, зависимость от мнения других, пассивность, мнительность, обидчивость, склонность к жертвенности, неуверенность в себе.",
+                3: "Поверхностность, расточительность, драматизация, нетерпение, разбросанность, болтливость, тщеславие, неорганизованность, склонность к сплетням.",
+                4: "Упрямство, консерватизм, излишняя практичность, медлительность, ригидность, скупость, педантичность, сопротивление изменениям, чрезмерный контроль.",
+                5: "Безответственность, непоследовательность, нетерпение, импульсивность, склонность к излишествам, непостоянство, склонность к зависимостям, непредсказуемость.",
+                6: "Самопожертвование, чрезмерная опека, собственничество, критичность, мнительность, ревность, склонность к мученичеству, вмешательство в чужие дела.",
+                7: "Цинизм, отстраненность, подозрительность, перфекционизм, скрытность, пессимизм, чрезмерная аналитика, социальная изоляция, высокомерие.",
+                8: "Материализм, властность, жесткость, трудоголизм, нетерпимость к слабостям, жажда контроля, алчность, манипулятивность, пренебрежение чувствами других.",
+                9: "Сентиментальность, жертвенность, непрактичность, мечтательность, обидчивость, склонность к депрессии, разочарованность, наивность, непоследовательность.",
+                11: "Нервозность, мечтательность без действия, сверхчувствительность, непрактичность, эмоциональная нестабильность, склонность к иллюзиям, перфекционизм.",
+                22: "Давление ответственности, перфекционизм, трудоголизм, подавление эмоций, чрезмерный контроль, маниакальность, непосильные обязательства, выгорание.",
+                33: "Чрезмерная жертвенность, эмоциональное выгорание, непрактичность, наивность, мученичество, потеря себя в служении другим, эмоциональная зависимость."
+            };
+            
+            return weaknesses[number] || "Слабые стороны для этого числа пока не определены.";
+        }
+        
+        function getLifePathAdvice(number) {
+            const advice = {
+                1: "Развивайте терпимость к другим мнениям, учитесь сотрудничать, не подавляйте окружающих своей силой. Находите баланс между лидерством и умением слушать. Развивайте эмпатию и учитесь ценить вклад других людей.",
+                2: "Учитесь принимать решения самостоятельно, развивайте уверенность в себе, не бойтесь конфликтов. Находите баланс между заботой о других и заботой о себе. Развивайте assertiveness - умение отстаивать свои границы.",
+                3: "Сосредоточьтесь на глубине, а не на количестве проектов, развивайте дисциплину, избегайте поверхностности. Научитесь доводить начатое до конца. Развивайте финансовую грамотность и практические навыки.",
+                4: "Будьте более гибкими, открывайтесь новому, не зацикливайтесь на рутине, развивайте творческое начало. Учитесь импровизировать и принимать изменения. Развивайте эмоциональный интеллект.",
+                5: "Учитесь завершать начатое, развивайте ответственность, найдите баланс между свободой и обязательствами. Развивайте постоянство в отношениях и проектах. Учитесь концентрации и глубине.",
+                6: "Не забывайте о собственных потребностях, устанавливайте здоровые границы, избегайте гиперопеки. Учитесь говорить 'нет' когда это необходимо. Развивайте собственную идентичность вне служения другим.",
+                7: "Больше доверяйте людям, развивайте эмоциональный интеллект, не уходите в чрезмерную изоляцию. Находите баланс между анализом и действием. Развивайте практические навыки общения.",
+                8: "Развивайте духовность, не ставьте материальные цели выше человеческих отношений, учитесь отдыхать. Находите баланс между работой и личной жизнью. Развивайте щедрость и альтруизм.",
+                9: "Будьте более практичными, учитесь говорить 'нет', не позволяйте другим использовать вашу доброту. Развивайте здоровый эгоизм и самозащиту. Учитесь отстаивать свои интересы.",
+                11: "Заземляйте свои идеи, развивайте практические навыки, не пренебрегайте материальным миром. Находите баланс между духовным и материальным. Учитесь воплощать идеи в реальность.",
+                22: "Уделяйте внимание личной жизни, не забывайте об отдыхе, развивайте эмоциональную сферу. Находите баланс между глобальными проектами и простыми радостями. Учитесь делегировать задачи.",
+                33: "Заботьтесь о себе, устанавливайте здоровые границы, не забывайте о практических аспектах жизни. Находите баланс между служением другим и заботой о себе. Развивайте практическую мудрость."
+            };
+            
+            return advice[number] || "Советы по развитию для этого числа пока не доступны.";
+        }
+        
+        function calculatePersonNumbers(name, birthDate) {
             const numbers = {};
             
-            // Расчет в зависимости от выбранного метода
-            if (method === 'names' || method === 'combined') {
-                if (name && name.trim() !== '') {
-                    numbers.destiny = calculateDestinyNumber(name);
-                    numbers.soul = calculateSoulNumber(name);
-                    numbers.appearance = calculateAppearanceNumber(name);
-                }
+            // Расчет числа жизненного пути
+            if (!isNaN(birthDate.getTime())) {
+                const day = birthDate.getDate();
+                const month = birthDate.getMonth() + 1;
+                const year = birthDate.getFullYear();
+                
+                numbers.lifePath = reduceNumber(day) + reduceNumber(month) + reduceNumber(year);
+                numbers.lifePath = reduceNumber(numbers.lifePath);
             }
             
-            if (method === 'birthdates' || method === 'combined') {
-                if (!isNaN(birthDate.getTime())) {
-                    numbers.lifePath = calculateLifePathNumber(birthDate);
-                    numbers.birthday = calculateBirthdayNumber(birthDate);
-                    numbers.karmic = calculateKarmicNumber(birthDate);
-                }
+            // Расчет числа судьбы
+            if (name && name.trim() !== '') {
+                numbers.destiny = calculateDestinyNumber(name);
             }
             
             return numbers;
-        }
-        
-        function calculateLifePathNumber(birthDate) {
-            const day = birthDate.getDate();
-            const month = birthDate.getMonth() + 1;
-            const year = birthDate.getFullYear();
-            
-            let lifePathNumber = reduceNumber(day) + reduceNumber(month) + reduceNumber(year);
-            return reduceNumber(lifePathNumber);
         }
         
         function calculateDestinyNumber(name) {
@@ -1368,157 +1309,60 @@
             return reduceNumber(sum);
         }
         
-        function calculateSoulNumber(name) {
-            const letterValues = {
-                'а': 1, 'е': 6, 'ё': 7, 'и': 1, 'о': 7, 'у': 3, 'ы': 2, 'э': 4, 'ю': 5, 'я': 6
-            };
-            
-            let sum = 0;
-            const lowerName = name.toLowerCase();
-            const vowels = 'аеёиоуыэюя';
-            
-            for (let i = 0; i < lowerName.length; i++) {
-                const char = lowerName[i];
-                if (vowels.includes(char) && letterValues[char]) {
-                    sum += letterValues[char];
-                }
-            }
-            
-            return reduceNumber(sum);
-        }
-        
-        function calculateAppearanceNumber(name) {
-            const letterValues = {
-                'б': 2, 'в': 3, 'г': 4, 'д': 5, 'ж': 8, 'з': 9, 'й': 2, 'к': 3, 'л': 4, 
-                'м': 5, 'н': 6, 'п': 8, 'р': 9, 'с': 1, 'т': 2, 'ф': 4, 'х': 5, 'ц': 6, 
-                'ч': 7, 'ш': 8, 'щ': 9, 'ъ': 1, 'ь': 3
-            };
-            
-            let sum = 0;
-            const lowerName = name.toLowerCase();
-            const consonants = 'бвгджзйклмнпрстфхцчшщъь';
-            
-            for (let i = 0; i < lowerName.length; i++) {
-                const char = lowerName[i];
-                if (consonants.includes(char) && letterValues[char]) {
-                    sum += letterValues[char];
-                }
-            }
-            
-            return reduceNumber(sum);
-        }
-        
-        function calculateBirthdayNumber(birthDate) {
-            return reduceNumber(birthDate.getDate());
-        }
-        
-        function calculateKarmicNumber(birthDate) {
-            const day = birthDate.getDate();
-            const month = birthDate.getMonth() + 1;
-            return reduceNumber(day + month);
-        }
-        
-        // ПЕРЕПИСАННАЯ ФУНКЦИЯ РАСЧЕТА СОВМЕСТИМОСТИ
-        function calculateCompatibility(person1, person2, method) {
+        // ИСПРАВЛЕННАЯ ФУНКЦИЯ РАСЧЕТА СОВМЕСТИМОСТИ
+        function calculateCompatibility(person1, person2) {
+            // Расчет совместимости на основе чисел жизненного пути и судьбы
             let compatibilityScore = 0;
-            let maxScore = 0;
+            let factors = 0;
             
-            // Расчет совместимости в зависимости от выбранного метода
-            if (method === 'names' || method === 'combined') {
-                if (person1.destiny && person2.destiny) {
-                    const destinyDiff = Math.abs(person1.destiny - person2.destiny);
-                    compatibilityScore += Math.max(0, 10 - destinyDiff) * 3;
-                    maxScore += 30;
-                }
-                
-                if (person1.soul && person2.soul) {
-                    const soulDiff = Math.abs(person1.soul - person2.soul);
-                    compatibilityScore += Math.max(0, 10 - soulDiff) * 2;
-                    maxScore += 20;
-                }
-                
-                if (person1.appearance && person2.appearance) {
-                    const appearanceDiff = Math.abs(person1.appearance - person2.appearance);
-                    compatibilityScore += Math.max(0, 10 - appearanceDiff) * 2;
-                    maxScore += 20;
-                }
+            if (person1.lifePath && person2.lifePath) {
+                const lifePathDiff = Math.abs(person1.lifePath - person2.lifePath);
+                // Чем меньше разница, тем выше совместимость
+                compatibilityScore += Math.max(0, 10 - lifePathDiff) * 4;
+                factors++;
             }
             
-            if (method === 'birthdates' || method === 'combined') {
-                if (person1.lifePath && person2.lifePath) {
-                    const lifePathDiff = Math.abs(person1.lifePath - person2.lifePath);
-                    compatibilityScore += Math.max(0, 10 - lifePathDiff) * 4;
-                    maxScore += 40;
-                }
-                
-                if (person1.birthday && person2.birthday) {
-                    const birthdayDiff = Math.abs(person1.birthday - person2.birthday);
-                    compatibilityScore += Math.max(0, 10 - birthdayDiff) * 1;
-                    maxScore += 10;
-                }
-                
-                if (person1.karmic && person2.karmic) {
-                    const karmicDiff = Math.abs(person1.karmic - person2.karmic);
-                    compatibilityScore += Math.max(0, 10 - karmicDiff) * 1;
-                    maxScore += 10;
-                }
+            if (person1.destiny && person2.destiny) {
+                const destinyDiff = Math.abs(person1.destiny - person2.destiny);
+                // Чем меньше разница, тем выше совместимость
+                compatibilityScore += Math.max(0, 10 - destinyDiff) * 3;
+                factors++;
             }
             
-            // Расчет процента совместимости
-            let percentage = maxScore > 0 ? Math.round((compatibilityScore / maxScore) * 100) : 50;
+            // Если есть оба фактора, нормализуем оценку
+            let percentage = factors > 0 ? Math.round(compatibilityScore / (factors * 10) * 100) : 50;
             
             // Ограничиваем процент от 20 до 100
             percentage = Math.max(20, Math.min(100, percentage));
             
-            // Генерация описания результатов
-            return generateCompatibilityResult(percentage, method);
-        }
-        
-        function generateCompatibilityResult(percentage, method) {
             let description, strengths, weaknesses, advice;
             
             if (percentage >= 85) {
-                description = "Исключительная совместимость! Ваши энергии идеально гармонируют друг с другом. Это редкое соединение, где партнеры взаимно дополняют и усиливают лучшие качества друг друга.";
-                strengths = "Глубокая эмоциональная связь, полное взаимопонимание, общие цели и ценности, способность поддерживать друг друга в трудные моменты.";
-                weaknesses = "Возможна излишняя зависимость друг от друга, риск потери индивидуальности в длительных отношениях.";
-                advice = "Сохраняйте личное пространство и интересы, поддерживайте индивидуальное развитие.";
+                description = "Исключительная совместимость! Ваши энергии идеально гармонируют друг с другом. Это редкое соединение, где партнеры взаимно дополняют и усиливают лучшие качества друг друга. Отношения основаны на глубоком понимании, взаимном уважении и общих жизненных ценностях.";
+                strengths = "Глубокая эмоциональная связь, полное взаимопонимание, общие цели и ценности, способность поддерживать друг друга в трудные моменты, взаимное уважение к индивидуальности, гармония в бытовых вопросах.";
+                weaknesses = "Возможна излишняя зависимость друг от друга, риск потери индивидуальности в длительных отношениях, сложности с установлением личных границ.";
+                advice = "Сохраняйте личное пространство и интересы, поддерживайте индивидуальное развитие, регулярно обсуждайте ожидания и границы в отношениях.";
             } else if (percentage >= 70) {
-                description = "Очень хорошая совместимость. У вас прочная основа для гармоничных отношений. Партнеры хорошо понимают друг друга и имеют схожие жизненные ориентиры.";
-                strengths = "Сильная эмоциональная связь, общие интересы и ценности, способность конструктивно решать конфликты, взаимная поддержка.";
-                weaknesses = "Периодические недопонимания из-за разного темперамента, возможны разногласия в вопросах быта и финансов.";
-                advice = "Учитесь открытому и честному общению, находите компромиссы в спорных вопросах.";
+                description = "Очень хорошая совместимость. У вас прочная основа для гармоничных отношений. Партнеры хорошо понимают друг друга и имеют схожие жизненные ориентиры. Отношения могут развиваться в позитивном направлении при взаимных усилиях.";
+                strengths = "Сильная эмоциональная связь, общие интересы и ценности, способность конструктивно решать конфликты, взаимная поддержка, уважение к различиям, стабильность в отношениях.";
+                weaknesses = "Периодические недопонимания из-за разного темперамента, возможны разногласия в вопросах быта и финансов, необходимость работать над коммуникацией.";
+                advice = "Учитесь открытому и честному общению, находите компромиссы в спорных вопросах, уважайте различия в темпераментах и подходах к жизни.";
             } else if (percentage >= 55) {
-                description = "Умеренная совместимость. Отношения имеют потенциал, но потребуют работы и взаимных уступок. Партнеры могут многому научиться друг у друга.";
-                strengths = "Взаимный интерес и притяжение, возможность роста через преодоление различий, взаимное обучение.";
-                weaknesses = "Значительные различия в ценностях и жизненных приоритетах, частые недопонимания, разные темпы жизни.";
-                advice = "Фокусируйтесь на общих целях и интересах, развивайте терпимость к различиям.";
+                description = "Умеренная совместимость. Отношения имеют потенциал, но потребуют работы и взаимных уступок. Партнеры могут многому научиться друг у друга, но различия в подходах к жизни могут создавать напряжение.";
+                strengths = "Взаимный интерес и притяжение, возможность роста через преодоление различий, взаимное обучение, развитие терпимости, обогащение опыта друг друга.";
+                weaknesses = "Значительные различия в ценностях и жизненных приоритетах, частые недопонимания, разные темпы жизни, возможна борьба за лидерство в отношениях.";
+                advice = "Фокусируйтесь на общих целях и интересах, развивайте терпимость к различиям, учитесь слушать и понимать точку зрения партнера, устанавливайте четкие правила общения.";
             } else if (percentage >= 40) {
-                description = "Сложная совместимость. Отношения будут требовать значительных усилий от обоих партнеров. Различия в основных жизненных подходах могут создавать постоянное напряжение.";
-                strengths = "Возможность научиться терпимости и пониманию совершенно другого подхода к жизни, развитие гибкости.";
-                weaknesses = "Постоянные конфликты и недопонимания, фундаментальные различия в ценностях и целях.";
-                advice = "Трезво оценивайте, стоят ли отношения таких усилий, ищите точки соприкосновения.";
+                description = "Сложная совместимость. Отношения будут требовать значительных усилий от обоих партнеров. Различия в основных жизненных подходах могут создавать постоянное напряжение и недопонимание.";
+                strengths = "Возможность научиться терпимости и пониманию совершенно другого подхода к жизни, развитие гибкости, получение ценного опыта преодоленияDifficulties.";
+                weaknesses = "Постоянные конфликты и недопонимания, фундаментальные различия в ценностях и целях, эмоциональная несовместимость, трудности в нахождении общего языка.";
+                advice = "Трезво оценивайте, стоят ли отношения таких усилий, ищите точки соприкосновения и общие интересы, рассматривайте возможность профессиональной помощи в налаживании коммуникации.";
             } else {
-                description = "Критически низкая совместимость. Отношения будут крайне сложными и энергозатратными. Фундаментальные различия в подходах к жизни могут сделать совместное существование практически невозможным.";
-                strengths = "Возможность получить урок терпимости и понимания кардинально другого мировоззрения.";
-                weaknesses = "Постоянные серьезные конфликты, полное непонимание мотивов и действий партнера.";
-                advice = "Seriously consider whether this relationship is worth the emotional cost.";
+                description = "Критически низкая совместимость. Отношения будут крайне сложными и энергозатратными. Фундаментальные различия в подходах к жизни могут сделать совместное существование практически невозможным без постоянных конфликтов.";
+                strengths = "Возможность получить урок терпимости и понимания кардинально другого мировоззрения, развитие навыков конфликтологии в экстремальных условиях.";
+                weaknesses = "Постоянные серьезные конфликты, полное непонимание мотивов и действий партнера, эмоциональное истощение, отсутствие общих точек соприкосновения.";
+                advice = "Seriously consider whether this relationship is worth the emotional cost. If you decide to continue, seek professional counseling and establish very clear boundaries.";
             }
-            
-            // Добавляем информацию о методе расчета
-            let methodInfo = "";
-            switch(method) {
-                case 'names':
-                    methodInfo = " (расчет по именам)";
-                    break;
-                case 'birthdates':
-                    methodInfo = " (расчет по датам рождения)";
-                    break;
-                case 'combined':
-                    methodInfo = " (комбинированный расчет)";
-                    break;
-            }
-            
-            description += methodInfo;
             
             return {
                 percentage,
@@ -1529,20 +1373,341 @@
             };
         }
         
-        // Остальные функции остаются без изменений
-        // ... (getLifePathDescription, getLifePathStrengths, getLifePathWeaknesses, getLifePathAdvice,
-        // calculateFavorableDays, calculateMatrix, calculateNumerologyPortrait и другие вспомогательные функции)
+        function calculateFavorableDays(birthDate, eventType, period) {
+            const today = new Date();
+            let daysCount, periodText;
+            
+            switch(period) {
+                case 'week':
+                    daysCount = 7;
+                    periodText = 'неделю';
+                    break;
+                case 'month':
+                    daysCount = 30;
+                    periodText = 'месяц';
+                    break;
+                case 'quarter':
+                    daysCount = 90;
+                    periodText = 'квартал';
+                    break;
+                case 'year':
+                    daysCount = 365;
+                    periodText = 'год';
+                    break;
+                default:
+                    daysCount = 30;
+                    periodText = 'месяц';
+            }
+            
+            // Генерация уникальных благоприятных дней (без дублирования)
+            const favorableDaysCount = 3 + Math.floor(Math.random() * 3);
+            const usedDays = new Set();
+            let daysHTML = `<p>Наиболее благоприятные дни в ближайшую ${periodText}:</p><ul>`;
+            
+            for (let i = 0; i < favorableDaysCount; i++) {
+                let randomDay;
+                let attempts = 0;
+                
+                // Гарантируем уникальность дат
+                do {
+                    randomDay = new Date(today);
+                    randomDay.setDate(today.getDate() + Math.floor(Math.random() * daysCount));
+                    attempts++;
+                } while (usedDays.has(randomDay.toDateString()) && attempts < 20);
+                
+                usedDays.add(randomDay.toDateString());
+                
+                const day = randomDay.getDate();
+                const month = randomDay.getMonth() + 1;
+                const year = randomDay.getFullYear();
+                
+                daysHTML += `<li><strong>${day}.${month}.${year}</strong> - благоприятный день для вашего события</li>`;
+            }
+            
+            daysHTML += '</ul>';
+            
+            const adviceText = {
+                'business': "В эти дни ваша энергия будет направлена на достижение карьерных целей. Планируйте важные встречи, переговоры и начало новых проектов. Особенно эффективны будут действия, связанные с инновациями и стратегическим планированием.",
+                'love': "Эти дни благоприятны для романтических встреч, признаний в любви и укрепления отношений. Откройте сердце для новых возможностей. Идеальное время для глубоких разговоров и совместного планирования будущего.",
+                'health': "В эти дни эффективны начало диет, оздоровительных практик и медицинских процедур. Слушайте свое тело и дайте ему необходимое. Особенно благоприятны дни для начала новых спортивных routines и консультаций со специалистами.",
+                'travel': "Эти дни идеальны для начала путешествий и исследовательских поездок. Новые места принесут вдохновение и ценный опыт. Планируйте маршруты, которые расширят ваш кругозор и принесут новые знакомства.",
+                'creativity': "В эти дни творческая энергия на пике. Начинайте художественные проекты, пишите, рисуйте, выражайте себя без ограничений. Особенно благоприятны дни для collaboration и представления своих работ публике.",
+                'family': "Эти дни благоприятны для семейных мероприятий, улучшения домашней атмосферы и решения бытовых вопросов. Идеальное время для обсуждения важных семейных тем и укрепления связей между родственниками."
+            };
+            
+            return {
+                days: daysHTML,
+                advice: adviceText[eventType] || "Используйте эти дни для продуктивной деятельности в выбранной сфере. Сфокусируйтесь на действиях, которые приблизят вас к вашим целям."
+            };
+        }
         
-        // Для краткости оставлю только сигнатуры этих функций, так как они не изменились
-        function getLifePathDescription(number) { /* ... */ }
-        function getLifePathStrengths(number) { /* ... */ }
-        function getLifePathWeaknesses(number) { /* ... */ }
-        function getLifePathAdvice(number) { /* ... */ }
-        function calculateFavorableDays(birthDate, eventType, period) { /* ... */ }
-        function calculateMatrix(birthDate) { /* ... */ }
-        function calculateNumerologyPortrait(fullName, birthDate) { /* ... */ }
-        // ... и другие функции
+        function calculateMatrix(birthDate) {
+            const day = birthDate.getDate();
+            const month = birthDate.getMonth() + 1;
+            const year = birthDate.getFullYear();
+            
+            // Расчет чисел для матрицы
+            const firstNumber = reduceNumber(day);
+            const secondNumber = reduceNumber(month);
+            const thirdNumber = reduceNumber(year);
+            const fourthNumber = reduceNumber(firstNumber + secondNumber + thirdNumber);
+            
+            // Создание сетки матрицы 3x3
+            let gridHTML = '';
+            const numbers = [firstNumber, secondNumber, thirdNumber, fourthNumber];
+            
+            for (let i = 1; i <= 9; i++) {
+                const isActive = numbers.includes(i);
+                gridHTML += `<div class="matrix-cell ${isActive ? 'active' : ''}">${i}</div>`;
+            }
+            
+            const description = `<p>Ваша матрица содержит числа: <strong>${firstNumber}</strong> (день рождения), <strong>${secondNumber}</strong> (месяц рождения), <strong>${thirdNumber}</strong> (год рождения) и <strong>${fourthNumber}</strong> (суммарное число судьбы).</p>
+            <p>Активные числа в вашей матрице указывают на ключевые энергии, влияющие на вашу жизнь. Каждое число несет определенную вибрацию и оказывает специфическое воздействие на различные аспекты вашего бытия.</p>`;
+            
+            const strengths = "Сильный аналитический ум, развитая интуиция, практичность в сочетании с творческим подходом к решению задач, способность к глубокой концентрации, умение видеть скрытые закономерности, талант к систематизации информации.";
+            const weaknesses = "Склонность к перфекционизму, occasional трудности в принятии решений, периодическая неуверенность в собственных силах, tendency к чрезмерному анализу ситуаций, сложности с быстрой адаптацией к изменениям.";
+            const advice = "Развивайте эмоциональный интеллект и навыки межличностного общения. Учитесь делегировать задачи и доверять другим. Находите баланс между работой и отдыхом. Практикуйте техники принятия решений в условиях неопределенности. Развивайте гибкость мышления и открытость новому опыту.";
+            
+            return {
+                grid: gridHTML,
+                description,
+                strengths,
+                weaknesses,
+                advice
+            };
+        }
         
+        function calculateNumerologyPortrait(fullName, birthDate) {
+            const name = fullName.toUpperCase();
+            
+            // Расчет числа жизненного пути
+            const day = birthDate.getDate();
+            const month = birthDate.getMonth() + 1;
+            const year = birthDate.getFullYear();
+            
+            let lifePathNumber = reduceNumber(day) + reduceNumber(month) + reduceNumber(year);
+            lifePathNumber = reduceNumber(lifePathNumber);
+            
+            // Расчет числа судьбы (по ФИО)
+            const letterValues = {
+                'А': 1, 'Б': 2, 'В': 3, 'Г': 4, 'Д': 5, 'Е': 6, 'Ё': 7, 'Ж': 8, 'З': 9,
+                'И': 1, 'Й': 2, 'К': 3, 'Л': 4, 'М': 5, 'Н': 6, 'О': 7, 'П': 8, 'Р': 9,
+                'С': 1, 'Т': 2, 'У': 3, 'Ф': 4, 'Х': 5, 'Ц': 6, 'Ч': 7, 'Ш': 8, 'Щ': 9,
+                'Ъ': 1, 'Ы': 2, 'Ь': 3, 'Э': 4, 'Ю': 5, 'Я': 6
+            };
+            
+            let destinySum = 0;
+            for (let i = 0; i < name.length; i++) {
+                const char = name[i];
+                if (letterValues[char]) {
+                    destinySum += letterValues[char];
+                }
+            }
+            const destinyNumber = reduceNumber(destinySum);
+            
+            // Расчет числа души (гласные)
+            const vowels = 'АЕЁИОУЫЭЮЯ';
+            let soulSum = 0;
+            for (let i = 0; i < name.length; i++) {
+                const char = name[i];
+                if (vowels.includes(char) && letterValues[char]) {
+                    soulSum += letterValues[char];
+                }
+            }
+            const soulNumber = reduceNumber(soulSum);
+            
+            // Расчет числа внешнего облика (согласные)
+            let appearanceSum = 0;
+            for (let i = 0; i < name.length; i++) {
+                const char = name[i];
+                if (!vowels.includes(char) && letterValues[char]) {
+                    appearanceSum += letterValues[char];
+                }
+            }
+            const appearanceNumber = reduceNumber(appearanceSum);
+            
+            // Расчет числа дня рождения
+            const birthdayNumber = reduceNumber(day);
+            
+            // Расчет кармического числа
+            const karmicNumber = reduceNumber(day + month);
+            
+            return {
+                lifePath: {
+                    number: lifePathNumber,
+                    description: getLifePathShortDescription(lifePathNumber)
+                },
+                destiny: {
+                    number: destinyNumber,
+                    description: getDestinyDescription(destinyNumber)
+                },
+                soul: {
+                    number: soulNumber,
+                    description: getSoulDescription(soulNumber)
+                },
+                appearance: {
+                    number: appearanceNumber,
+                    description: getAppearanceDescription(appearanceNumber)
+                },
+                birthday: {
+                    number: birthdayNumber,
+                    description: getBirthdayDescription(birthdayNumber)
+                },
+                karmic: {
+                    number: karmicNumber,
+                    description: getKarmicDescription(karmicNumber)
+                },
+                strengths: "Вы обладаете редким сочетанием аналитического ума и творческих способностей. Ваша сильная воля сочетается с развитой интуицией, что позволяет вам достигать поставленных целей нестандартными путями. Вы умеете вдохновлять людей и создавать вокруг себя гармоничную атмосферу.",
+                weaknesses: "Иногда вы можете быть излишне критичны к себе и окружающим. Склонность к перфекционизму может замедлять ваше движение вперед. Временами вы испытываете трудности с принятием быстрых решений в условиях неопределенности.",
+                advice: "Развивайте навыки быстрого принятия решений и учитесь доверять своей интуиции. Практикуйте техники эмоциональной саморегуляции. Находите баланс между работой и отдыхом. Учитесь делегировать задачи и принимать помощь от других. Развивайте гибкость в общении с разными типами личности."
+            };
+        }
+        
+        function getLifePathShortDescription(number) {
+            const descriptions = {
+                1: "Лидер, новатор, первооткрыватель",
+                2: "Дипломат, миротворец, сотрудник",
+                3: "Творец, коммуникатор, оптимист",
+                4: "Строитель, организатор, практик",
+                5: "Исследователь, новатор, авантюрист",
+                6: "Воспитатель, защитник, гармонизатор",
+                7: "Аналитик, мудрец, исследователь",
+                8: "Организатор, руководитель, материалист",
+                9: "Гуманист, филантроп, учитель",
+                11: "Вдохновитель, просветитель, визионер",
+                22: "Строитель-практик, мастер, реализатор",
+                33: "Учитель, целитель, служитель"
+            };
+            return descriptions[number] || "Уникальный путь";
+        }
+        
+        function getDestinyDescription(number) {
+            const descriptions = {
+                1: "Ваше предназначение - лидерство и создание нового",
+                2: "Ваша миссия - гармонизация отношений и сотрудничество",
+                3: "Ваша судьба - творческое самовыражение и вдохновение",
+                4: "Ваша задача - создание прочных основ и систем",
+                5: "Ваш путь - свобода, изменения и расширение горизонтов",
+                6: "Ваше призвание - служение семье и обществу",
+                7: "Ваша цель - поиск истины и глубинного знания",
+                8: "Ваша миссия - материальное воплощение идей",
+                9: "Ваше предназначение - служение человечеству",
+                11: "Ваша судьба - духовное просвещение и вдохновение",
+                22: "Ваша задача - практическая реализация глобальных идей",
+                33: "Ваше призвание - служение через любовь и исцеление"
+            };
+            return descriptions[number] || "Уникальное предназначение";
+        }
+        
+        function getSoulDescription(number) {
+            const descriptions = {
+                1: "Вы стремитесь к независимости и самореализации",
+                2: "Ваша душа жаждет гармонии и партнерства",
+                3: "Вы ищете самовыражения и творческой реализации",
+                4: "Ваша душа ценит стабильность и безопасность",
+                5: "Вы стремитесь к свободе и новым впечатлениям",
+                6: "Ваша душа ищет любви и семейного счастья",
+                7: "Вы стремитесь к мудрости и духовному росту",
+                8: "Ваша душа жаждет признания и материального успеха",
+                9: "Вы ищете служения и помощи другим",
+                11: "Ваша душа стремится к духовному просветлению",
+                22: "Вы жаждете практической реализации великих идей",
+                33: "Ваша душа ищет безусловной любви и служения"
+            };
+            return descriptions[number] || "Уникальные душевные стремления";
+        }
+        
+        function getAppearanceDescription(number) {
+            const descriptions = {
+                1: "Вы производите впечатление уверенного и независимого человека",
+                2: "Вас воспринимают как дипломатичного и дружелюбного",
+                3: "Вы кажетесь творческим и обаятельным",
+                4: "Вас видят надежным и практичным",
+                5: "Вы производите впечатление свободолюбивого и динамичного",
+                6: "Вас воспринимают как заботливого и ответственного",
+                7: "Вы кажетесь мудрым и сдержанным",
+                8: "Вас видят успешным и авторитетным",
+                9: "Вы производите впечатление великодушного и альтруистичного",
+                11: "Вас воспринимают как вдохновенного и духовного",
+                22: "Вы кажетесь практичным мечтателем",
+                33: "Вас видят как сострадательного и мудрого"
+            };
+            return descriptions[number] || "Уникальное внешнее впечатление";
+        }
+        
+        function getBirthdayDescription(number) {
+            const descriptions = {
+                1: "Талант лидерства и инициативы",
+                2: "Дар дипломатии и сотрудничества",
+                3: "Творческие способности и коммуникабельность",
+                4: "Практичность и организаторские способности",
+                5: "Адаптивность и любознательность",
+                6: "Ответственность и заботливость",
+                7: "Аналитический ум и интуиция",
+                8: "Деловая хватка и амбициозность",
+                9: "Гуманизм и щедрость",
+                10: "Уверенность в себе и лидерские качества",
+                11: "Вдохновенность и духовность",
+                12: "Творческий подход и коммуникабельность",
+                13: "Практичность и трудолюбие",
+                14: "Адаптивность и свобода",
+                15: "Ответственность и семейные ценности",
+                16: "Аналитический ум и глубина",
+                17: "Деловые качества и уверенность",
+                18: "Гуманизм и альтруизм",
+                19: "Лидерство и независимость",
+                20: "Дипломатия и чувствительность",
+                21: "Творчество и оптимизм",
+                22: "Практическая мудрость и масштабность",
+                23: "Адаптивность и коммуникабельность",
+                24: "Ответственность и гармония",
+                25: "Аналитические способности и интуиция",
+                26: "Деловые качества и партнерство",
+                27: "Гуманизм и мудрость",
+                28: "Лидерство и уверенность",
+                29: "Чувствительность и интуиция",
+                30: "Творчество и самовыражение",
+                31: "Практичность и инициатива"
+            };
+            return descriptions[number] || "Уникальный врожденный талант";
+        }
+        
+        function getKarmicDescription(number) {
+            const descriptions = {
+                1: "Урок независимости и уверенности в себе",
+                2: "Урок сотрудничества и терпимости",
+                3: "Урок самовыражения и радости жизни",
+                4: "Урок дисциплины и практичности",
+                5: "Урок свободы и ответственности",
+                6: "Урок любви и заботы о других",
+                7: "Урок веры и духовного развития",
+                8: "Урок изобилия и щедрости",
+                9: "Урок служения и всепрощения",
+                10: "Урок лидерства и инициативы",
+                11: "Урок духовного просветления",
+                12: "Урок творческого самовыражения",
+                13: "Урок практичности и усердия",
+                14: "Урок адаптивности и свободы",
+                15: "Урок любви и ответственности",
+                16: "Урок мудрости и самопознания",
+                17: "Урок успеха и уверенности",
+                18: "Урок гуманизма и альтруизма",
+                19: "Урок лидерства и независимости",
+                20: "Урок дипломатии и чувствительности",
+                21: "Урок творчества и оптимизма",
+                22: "Урок практической реализации",
+                23: "Урок адаптивности и общения",
+                24: "Урок гармонии и ответственности",
+                25: "Урок интуиции и анализа",
+                26: "Урок партнерства и успеха",
+                27: "Урок мудрости и гуманизма",
+                28: "Урок уверенности и лидерства",
+                29: "Урок интуиции и чувствительности",
+                30: "Урок самовыражения и творчества",
+                31: "Урок инициативы и практичности"
+            };
+            return descriptions[number] || "Уникальный кармический урок";
+        }
     </script>
 </body>
 </html>
