@@ -1,10 +1,10 @@
-<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Космос Чисел - NumerologyLab</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #2c3e50;
@@ -21,12 +21,13 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         html, body {
             max-width: 100%;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
         
         body {
@@ -44,43 +45,64 @@
         
         /* Header */
         header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: rgba(44, 62, 80, 0.95);
             color: white;
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
         }
         
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 1rem 0;
         }
         
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
         }
         
         .logo h1 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(45deg, #fff, #e0f7fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
         .logo-icon {
-            font-size: 2rem;
+            font-size: 2.2rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
         
         nav ul {
             display: flex;
             list-style: none;
+            gap: 0.5rem;
         }
         
         nav ul li {
-            margin-left: 1.5rem;
+            position: relative;
         }
         
         nav ul li a {
@@ -88,12 +110,54 @@
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
-            padding: 0.5rem 0.8rem;
-            border-radius: 4px;
+            padding: 0.8rem 1.2rem;
+            border-radius: 25px;
+            position: relative;
+            overflow: hidden;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+        
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        nav ul li a:hover::before {
+            left: 100%;
         }
         
         nav ul li a:hover {
-            background-color: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--secondary));
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        nav ul li a:hover::after {
+            width: 80%;
+        }
+        
+        nav ul li a.active {
+            background: rgba(255,255,255,0.2);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
         
         .mobile-menu-btn {
@@ -103,6 +167,26 @@
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .mobile-menu-btn:hover {
+            background: rgba(255,255,255,0.1);
+            transform: rotate(90deg);
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         /* Hero Section */
@@ -110,43 +194,117 @@
             background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             color: white;
-            padding: 5rem 0;
+            padding: 8rem 0;
             text-align: center;
             margin: 0;
             width: 100%;
             overflow-x: hidden;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.3) 100%);
+        }
+        
+        .hero .container {
+            position: relative;
+            z-index: 2;
         }
         
         .hero h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease;
         }
         
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             max-width: 700px;
-            margin: 0 auto 2rem;
+            margin: 0 auto 3rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            animation: fadeInUp 1s ease 0.2s both;
         }
         
         .btn {
             display: inline-block;
-            background-color: var(--accent);
+            background: linear-gradient(45deg, var(--accent), var(--secondary));
             color: white;
-            padding: 0.8rem 1.5rem;
+            padding: 1rem 2.5rem;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             border: none;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
         }
         
         .btn:hover {
-            background-color: #8e44ad;
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            background: linear-gradient(45deg, var(--secondary), var(--accent));
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         /* Features Section */
@@ -163,6 +321,7 @@
             font-size: 2.2rem;
             color: var(--primary);
             margin-bottom: 0.5rem;
+            font-family: 'Playfair Display', serif;
         }
         
         .section-title p {
@@ -179,17 +338,35 @@
         
         .feature-card {
             background: white;
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
+            border-radius: 15px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
             text-align: center;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
         }
         
         .feature-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
         
         .feature-icon {
@@ -202,6 +379,7 @@
             font-size: 1.4rem;
             margin-bottom: 1rem;
             color: var(--primary);
+            font-family: 'Playfair Display', serif;
         }
         
         /* Calculators Section */
@@ -683,8 +861,15 @@
             
             nav {
                 display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
                 width: 100%;
-                margin-top: 1rem;
+                background: rgba(44, 62, 80, 0.98);
+                backdrop-filter: blur(20px);
+                padding: 1rem 0;
+                animation: slideDown 0.3s ease;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.2);
             }
             
             nav.active {
@@ -693,10 +878,23 @@
             
             nav ul {
                 flex-direction: column;
+                gap: 0;
             }
             
             nav ul li {
-                margin: 0.5rem 0;
+                margin: 0;
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 1rem 2rem;
+                border-radius: 0;
+                text-align: center;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            nav ul li a::after {
+                display: none;
             }
             
             .matrix-container {
@@ -711,7 +909,6 @@
                 font-size: 2.5rem;
             }
             
-            /* Исправления для hero секции на мобильных */
             .hero {
                 padding: 3rem 0;
                 margin: 0;
@@ -727,6 +924,10 @@
                 font-size: 1rem;
                 padding: 0 10px;
             }
+            
+            .logo h1 {
+                font-size: 1.4rem;
+            }
         }
     </style>
 </head>
@@ -739,10 +940,12 @@
                     <span class="logo-icon">🔢</span>
                     <h1>Космос Чисел</h1>
                 </div>
-                <button class="mobile-menu-btn">☰</button>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
                 <nav>
                     <ul>
-                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#home" class="active">Главная</a></li>
                         <li><a href="#about">О нумерологии</a></li>
                         <li><a href="#calculators">Калькуляторы</a></li>
                         <li><a href="#compatibility">Совместимость</a></li>
@@ -771,27 +974,27 @@
                 <p>Откройте для себя полный спектр нумерологических инструментов для самопознания</p>
             </div>
             <div class="features-grid">
-                <div class="feature-card" data-tab="life-path">
+                <div class="feature-card fade-in" data-tab="life-path">
                     <div class="feature-icon">🌌</div>
                     <h3>Число Жизненного Пути</h3>
                     <p>Узнайте свое основное число, которое определяет ваш жизненный путь и предназначение</p>
                 </div>
-                <div class="feature-card" data-tab="compatibility">
+                <div class="feature-card fade-in" data-tab="compatibility">
                     <div class="feature-icon">💫</div>
                     <h3>Совместимость</h3>
                     <p>Проанализируйте совместимость с партнером, друзьями или коллегами по числам</p>
                 </div>
-                <div class="feature-card" data-tab="planning">
+                <div class="feature-card fade-in" data-tab="planning">
                     <div class="feature-icon">📅</div>
                     <h3>Планирование</h3>
                     <p>Определите благоприятные дни для важных событий с помощью нумерологии</p>
                 </div>
-                <div class="feature-card" data-tab="matrix">
+                <div class="feature-card fade-in" data-tab="matrix">
                     <div class="feature-icon">📊</div>
                     <h3>Матрица Судьбы</h3>
                     <p>Получите полный нумерологический портрет с помощью современной матрицы</p>
                 </div>
-                <div class="feature-card" data-tab="portrait">
+                <div class="feature-card fade-in" data-tab="portrait">
                     <div class="feature-icon">👤</div>
                     <h3>Нумерологический портрет</h3>
                     <p>Полный анализ личности по Ф.И.О. с детальной расшифровкой</p>
@@ -1184,8 +1387,93 @@
 
     <script>
         // Мобильное меню
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('nav').classList.toggle('active');
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const nav = document.querySelector('nav');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            nav.classList.toggle('active');
+            const icon = this.querySelector('i');
+            if (nav.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Закрытие меню при клике на ссылку
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+            });
+        });
+        
+        // Активный пункт меню при скролле
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+        
+        function setActiveMenu() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', setActiveMenu);
+        
+        // Анимация появления элементов при скролле
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        function checkFade() {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkFade);
+        window.addEventListener('load', checkFade);
+        
+        // Плавная прокрутка для всех ссылок
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Анимация для логотипа
+        const logo = document.querySelector('.logo');
+        logo.addEventListener('mouseenter', () => {
+            logo.style.transform = 'scale(1.05)';
+        });
+        
+        logo.addEventListener('mouseleave', () => {
+            logo.style.transform = 'scale(1)';
         });
         
         // Кликабельные блоки функций
@@ -1207,19 +1495,15 @@
         };
         
         function switchToTab(tabName) {
-            // Скрыть все формы
             Object.values(forms).forEach(form => {
                 form.style.display = 'none';
             });
             
-            // Показать выбранную форму
             forms[tabName].style.display = 'block';
             
-            // Обновить активную вкладку
             tabs.forEach(t => t.classList.remove('active'));
             document.querySelector(`.calculator-tab[data-tab="${tabName}"]`).classList.add('active');
             
-            // Прокрутить к калькуляторам
             document.getElementById('calculators').scrollIntoView({ behavior: 'smooth' });
         }
         
@@ -1230,7 +1514,7 @@
             });
         });
         
-        // Выбор метода расчета совместимости
+         // Выбор метода расчета совместимости
         let currentMethod = 'names';
         const methodOptions = document.querySelectorAll('.method-option');
         
