@@ -42,6 +42,13 @@
             margin: 0 auto;
             padding: 0 15px;
         }
+
+        /* Исправление для мобильных - контейнер на всю ширину */
+        .mobile-full-width {
+            width: 100%;
+            max-width: 100%;
+            padding: 0 20px;
+        }
         
         /* Header */
         header {
@@ -678,17 +685,6 @@
             margin-bottom: 0.5rem;
         }
         
-        /* Адаптивные стили для выбора метода */
-        @media (max-width: 576px) {
-            .method-selector {
-                flex-direction: column;
-            }
-            
-            .method-option {
-                min-width: 100%;
-            }
-        }
-        
         /* Blog Section */
         .blog {
             padding: 5rem 0;
@@ -798,7 +794,7 @@
             font-size: 0.9rem;
         }
         
-        /* Responsive */
+        /* Responsive - ИСПРАВЛЕНИЯ ДЛЯ МОБИЛЬНЫХ */
         @media (max-width: 992px) {
             .matrix-container {
                 max-width: 250px;
@@ -826,32 +822,109 @@
             }
             
             .hero h2 {
-                font-size: 2rem;
+                font-size: 2.5rem;
+                line-height: 1.2;
+                padding: 0 10px;
             }
             
             .hero p {
-                font-size: 1rem;
+                font-size: 1.2rem;
+                line-height: 1.5;
+                padding: 0 15px;
             }
             
             .calculator-tabs {
                 flex-direction: column;
-                align-items: center;
+                align-items: stretch;
+                gap: 0.8rem;
             }
             
             .calculator-tab {
                 width: 100%;
-                max-width: 300px;
                 justify-content: center;
+                padding: 1.2rem 1.5rem;
+                font-size: 1.1rem;
+            }
+            
+            .calculator-content {
+                padding: 1.5rem;
+                margin: 0 -10px;
+                border-radius: 0;
+            }
+            
+            .calculator-form {
+                max-width: 100%;
+            }
+            
+            .form-group input, 
+            .form-group select, 
+            .form-group textarea {
+                font-size: 16px; /* Убирает зум на iOS */
+                padding: 1rem;
             }
             
             .day-item {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 0.5rem;
+                gap: 0.8rem;
+                padding: 1rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 0 10px;
+            }
+            
+            .feature-card {
+                padding: 2rem 1.5rem;
+                margin: 0 5px;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 0 10px;
+            }
+            
+            .portrait-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            
+            .method-selector {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .method-option {
+                min-width: 100%;
+                padding: 1.2rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+                padding: 0 15px;
+            }
+            
+            .section-title p {
+                padding: 0 20px;
+                font-size: 1.1rem;
             }
         }
         
         @media (max-width: 576px) {
+            .container {
+                width: 100%;
+                padding: 0 20px;
+            }
+            
             .mobile-menu-btn {
                 display: block;
                 position: absolute;
@@ -879,6 +952,7 @@
             nav ul {
                 flex-direction: column;
                 gap: 0;
+                padding: 0 20px;
             }
             
             nav ul li {
@@ -887,10 +961,12 @@
             
             nav ul li a {
                 display: block;
-                padding: 1rem 2rem;
-                border-radius: 0;
+                padding: 1.2rem 1rem;
+                border-radius: 8px;
                 text-align: center;
                 border-bottom: 1px solid rgba(255,255,255,0.1);
+                margin-bottom: 5px;
+                font-size: 1.1rem;
             }
             
             nav ul li a::after {
@@ -898,35 +974,119 @@
             }
             
             .matrix-container {
-                max-width: 200px;
+                max-width: 280px;
+                gap: 8px;
             }
             
             .matrix-cell {
-                font-size: 1rem;
+                font-size: 1.3rem;
             }
             
             .result-number {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
             
             .hero {
-                padding: 3rem 0;
-                margin: 0;
-                width: 100%;
+                padding: 4rem 0;
             }
             
             .hero h2 {
+                font-size: 2rem;
+                padding: 0 15px;
+                line-height: 1.3;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+                padding: 0 20px;
+                line-height: 1.5;
+            }
+            
+            .btn {
+                padding: 1.2rem 2rem;
+                font-size: 1.1rem;
+                width: 90%;
+                max-width: 300px;
+            }
+            
+            .logo h1 {
+                font-size: 1.6rem;
+            }
+            
+            .logo-icon {
                 font-size: 1.8rem;
-                padding: 0 10px;
+            }
+            
+            .calculator-result {
+                padding: 1.2rem;
+                margin: 1.5rem -10px 0 -10px;
+                border-radius: 0;
+            }
+            
+            .strengths, 
+            .weaknesses, 
+            .advice {
+                padding: 1.2rem;
+                margin: 1.2rem 0;
+            }
+            
+            .compatibility-score {
+                font-size: 2.2rem;
+            }
+            
+            .portrait-number {
+                font-size: 2.2rem;
+            }
+            
+            .feature-card h3 {
+                font-size: 1.3rem;
+            }
+            
+            .feature-card p {
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+            
+            /* Исправление текста в карточках калькуляторов */
+            .calculator-form h3 {
+                font-size: 1.4rem;
+                text-align: center;
+                margin-bottom: 1rem;
+            }
+            
+            .calculator-form p {
+                text-align: center;
+                font-size: 1rem;
+                line-height: 1.5;
+                margin-bottom: 1.5rem;
+            }
+            
+            .form-group label {
+                font-size: 1rem;
+                margin-bottom: 0.8rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .hero h2 {
+                font-size: 1.8rem;
             }
             
             .hero p {
                 font-size: 1rem;
-                padding: 0 10px;
             }
             
             .logo h1 {
                 font-size: 1.4rem;
+            }
+            
+            .feature-card {
+                padding: 1.5rem 1rem;
+            }
+            
+            .calculator-tab {
+                padding: 1rem 1.2rem;
+                font-size: 1rem;
             }
         }
     </style>
